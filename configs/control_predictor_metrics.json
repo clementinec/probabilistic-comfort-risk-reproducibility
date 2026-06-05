@@ -1,0 +1,20 @@
+{
+  "nominal": {
+    "accuracy": 0.47734329298474554,
+    "log_loss": 1.333373919732087,
+    "tail_probability_mae": 0.27915173284245953,
+    "expected_tsv_mae": 0.7582534956250996
+  },
+  "ordinal": {
+    "accuracy": 0.47297844575439857,
+    "log_loss": 1.4543682093404329,
+    "tail_probability_mae": 0.27732351573504405,
+    "expected_tsv_mae": 0.7609844347185336
+  },
+  "n_total": 148148,
+  "n_train": 103703,
+  "n_calibration": 22222,
+  "n_test": 22223,
+  "n_estimators": 400,
+  "sample_limit": null
+}
