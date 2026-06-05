@@ -857,7 +857,8 @@ def write_manuscript_figure(rows: pd.DataFrame, output_dir: Path) -> list[Path]:
     ax_scatter.set_xlabel(r"Expected sensation $\mu_{\mathrm{TSV}}$")
     ax_scatter.set_ylabel(r"Discomfort-tail probability $P(|\mathrm{TSV}|\geq2)$")
     ax_scatter.set_title(
-        "A. Expected sensation is informative but not sufficient near the diagnostic boundary",
+        "A. Expected sensation is informative but not sufficient\n"
+        "near the diagnostic boundary",
         loc="left",
         weight="bold",
         fontsize=9.6,
