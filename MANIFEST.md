@@ -1,6 +1,6 @@
 # Reproducibility Package Manifest
 
-Date: 2026-06-05
+Date: 2026-06-06
 
 Package size: approximately 4.3 MB before Git metadata.
 
@@ -12,6 +12,7 @@ This lightweight package is suitable for a public GitHub repository. It contains
 
 - `README.md`: package overview, data restrictions, and repository plan.
 - `MANIFEST.md`: this manifest.
+- `.gitignore`: excludes local plotting cache artifacts.
 
 ### `configs/`
 
@@ -57,18 +58,19 @@ Local raw-trace directories available outside this lightweight package:
 
 ## SHA-256 Checksums
 
-Checksums below are for the files present before this manifest was added.
+Checksums below are for the tracked package files listed above, excluding this manifest.
 
 ```text
+1f4a50eebb08308bddea96d21129b5bc33bf4612b8431b3af257ee1cbc27dcdc  .gitignore
 505698522590d74019e1830565426d669463f7a196370fd6c7c8778976892a6f  README.md
 b5922472a72727d71d263e5968dd474ab13ee8ec630570578d199d2275494713  configs/control_predictor_metrics.json
 7e0a1415a7cb2ea2cdeb7356477c56ac5462ed8c83cf2241b3ed0541db53ba0a  configs/medium_office_otc_control.idf
 a618f6162a15d82f2d06046b1920bdc9dfc4f3d32574a9581ce3570ec7b97165  figures/city_year_tail_trend.png
-982261f13823d91e764fdf189b028a83e676e6853091dba2dfb4aa51e5cdab11  figures/probability_necessity_manuscript_figure.pdf
-00219cb7a9c3f31124e47fafb6099e5d7e87d8b5c65800319ff22ae3eda44fb1  figures/probability_necessity_manuscript_figure.png
+69415fc00890e37c6393741a22527e2dbb149fea0ff2d49c78fd27e57612a370  figures/probability_necessity_manuscript_figure.pdf
+1c58ab77484017d05968f611a340fdc85f9b3d565c78bf9665916e7920117dab  figures/probability_necessity_manuscript_figure.png
 3be2585b49fc9c4e7d85d5766b192db18930c16f14c69ba046762e4a89d6afe6  figures/tail_spread_by_mean_bin.png
 86278bf4262a6e12fbde124179893960bebc1786c019238cc7fbab5153afb74d  scripts/convert_cmip_csv_to_epw.py
-ab496cd3ff5a44e3cb30bf0832afbc39be1b54e6733c53dbcf1525c6ec8c5408  scripts/probability_necessity_diagnostic.py
+96db51e482e1c1bdf5f32ffd1a529970de75d83c1a9a7c96016b648b3ddabbf4  scripts/probability_necessity_diagnostic.py
 4c9377cda5864200f0f0cfcef567e75df9657b8fcbf1f01e6077caae38e3ac54  summary_outputs/boundary_region_summary.csv
 071b219b6e5a61b0379cc2d9455161c16373c1d4b9d05f15d557a02d7b927eca  summary_outputs/directional_tail_diagnostics.csv
 1b36a6b09606be87ec736d7856834ff7f06a2c1c7301af1cb4e917e9b59f3576  summary_outputs/matched_mean_tail_divergence.csv
