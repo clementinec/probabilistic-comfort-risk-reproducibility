@@ -52,6 +52,6 @@ The compact row-level zone-aggregation table is also stored as `summary_outputs/
 
 ## Repository Plan
 
-This folder is prepared as the submission-time Supplementary Data package and is small enough to be committed directly to a public GitHub repository. It contains scripts, configuration files, processed summary outputs, and generated diagnostic figures needed to inspect the probability-threshold, annual OAT sensitivity, zone-aggregation, tail-steering, and stress-window threshold analyses reported in the manuscript.
+This folder is prepared as the submission-time Supplementary Data package and is small enough to be committed directly to a public GitHub repository. It contains scripts, configuration files, processed summary outputs, and generated diagnostic figures needed to inspect the probability-threshold, zone-aggregation, tail-steering, and stress-window threshold analyses reported in the manuscript, plus compact annual OAT sensitivity summaries for auditing the reported ranking and EUI CV.
 
 The second-revision R2 zone-level traces are now bundled in compressed form for direct inspection of the zone-aggregation and tail-steering diagnostics. Larger EnergyPlus working directories, source weather archives, and third-party thermal-comfort records remain excluded; if publication requires full raw working directories, they should be deposited separately in a DOI-bearing repository such as Zenodo or OSF, with this GitHub package linking to that archive.
