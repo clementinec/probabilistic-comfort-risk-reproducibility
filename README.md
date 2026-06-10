@@ -8,6 +8,8 @@ This package contains the processed outputs and scripts needed to reproduce the 
 
 - `summary_outputs/`: processed diagnostic summaries used in the manuscript.
   - `probability_necessity_summary.csv`
+  - `annual_oat_elasticity_summary.csv`
+  - `annual_oat_eui_cv_summary.csv`
   - `boundary_region_summary.csv`
   - `mean_threshold_decision_diagnostics.csv`
   - `tail_spread_by_mean_bin.csv`
@@ -25,6 +27,7 @@ This package contains the processed outputs and scripts needed to reproduce the 
   - `zone_tail_diagnostic_summary.md`
 - `scripts/`: analysis and weather-conversion scripts.
   - `probability_necessity_diagnostic.py`
+  - `compute_oat_sensitivity_summary.py`
   - `convert_cmip_csv_to_epw.py`
   - `build_zone_and_tail_diagnostics.py`
   - `rerun_medium_office_temporal_R2_trace_export.py`
@@ -49,6 +52,6 @@ The compact row-level zone-aggregation table is also stored as `summary_outputs/
 
 ## Repository Plan
 
-This folder is prepared as the submission-time Supplementary Data package and is small enough to be committed directly to a public GitHub repository. It contains scripts, configuration files, processed summary outputs, and generated diagnostic figures needed to inspect the probability-threshold, zone-aggregation, tail-steering, and stress-window threshold analyses reported in the manuscript.
+This folder is prepared as the submission-time Supplementary Data package and is small enough to be committed directly to a public GitHub repository. It contains scripts, configuration files, processed summary outputs, and generated diagnostic figures needed to inspect the probability-threshold, annual OAT sensitivity, zone-aggregation, tail-steering, and stress-window threshold analyses reported in the manuscript.
 
 The second-revision R2 zone-level traces are now bundled in compressed form for direct inspection of the zone-aggregation and tail-steering diagnostics. Larger EnergyPlus working directories, source weather archives, and third-party thermal-comfort records remain excluded; if publication requires full raw working directories, they should be deposited separately in a DOI-bearing repository such as Zenodo or OSF, with this GitHub package linking to that archive.

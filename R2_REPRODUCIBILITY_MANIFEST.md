@@ -7,6 +7,7 @@ This addendum records the second-revision diagnostic additions prepared for `BAE
 ## New Diagnostic Script
 
 - `scripts/build_zone_and_tail_diagnostics.py`: builds the zone-aggregation, hidden-tail, and tail-steering coherence diagnostics from the Medium Office future-weather traces. In this public repository layout, it reads `traces/*_ordinal.csv.gz` directly.
+- `scripts/compute_oat_sensitivity_summary.py`: verifies the compact annual OAT max-elasticity ranking and reports the archived EUI coefficient of variation used in Supplementary Section S1.3.
 
 ## Modified Trace Generator
 
@@ -14,6 +15,8 @@ This addendum records the second-revision diagnostic additions prepared for `BAE
 
 ## New Diagnostic Outputs
 
+- `summary_outputs/annual_oat_elasticity_summary.csv`: compact archived OAT elasticity matrix for the Los Angeles annual controller sensitivity sweep.
+- `summary_outputs/annual_oat_eui_cv_summary.csv`: compact archived EUI coefficient-of-variation summary for the Los Angeles annual OAT sweep.
 - `summary_outputs/zone_aggregation_summary.csv`: city/year summary comparing mean-zone, any-zone, and 90th-percentile zone aggregation.
 - `summary_outputs/zone_risk_ranking.csv`: zone-level risk ranking by discomfort-tail exposure.
 - `summary_outputs/hidden_zone_tail_examples.csv`: examples where mean aggregation hides at least one high-tail zone.

@@ -32,6 +32,7 @@ This package is suitable for a public GitHub repository. It contains processed d
 
 ### `scripts/`
 
+- `compute_oat_sensitivity_summary.py`: verifies the compact annual OAT max-elasticity ranking and reports the archived EUI coefficient of variation used in Supplementary Section S1.3.
 - `convert_cmip_csv_to_epw.py`: CMIP-derived CSV to EPW conversion utility.
 - `probability_necessity_diagnostic.py`: probability-threshold diagnostic and figure-generation script.
 - `build_zone_and_tail_diagnostics.py`: R2 zone-aggregation and tail-steering diagnostic script.
@@ -39,6 +40,8 @@ This package is suitable for a public GitHub repository. It contains processed d
 
 ### `summary_outputs/`
 
+- `annual_oat_elasticity_summary.csv`: compact archived OAT elasticity matrix for the Los Angeles annual controller sensitivity sweep.
+- `annual_oat_eui_cv_summary.csv`: compact archived EUI coefficient-of-variation summary for the Los Angeles annual OAT sweep.
 - `boundary_region_summary.csv`: boundary-region summary for the expected-TSV risk band.
 - `directional_tail_diagnostics.csv`: directional warm/cold tail diagnostics.
 - `matched_mean_tail_divergence.csv`: matched-mean tail-divergence examples.
@@ -79,6 +82,7 @@ This package is suitable for a public GitHub repository. It contains processed d
 - ASHRAE Global Thermal Comfort Database II: third-party dataset; users must obtain it from the original source and comply with its terms.
 - CMIP-derived source weather CSVs and generated EPWs: not bundled in this lightweight package; provenance and conversion assumptions are documented in the manuscript and README.
 - Redundant combined R2 trace file `medium_office_control_traces.csv`: not tracked because it can be reconstructed from `traces/*_ordinal.csv.gz`.
+- Raw annual OAT simulator working directories and the original run-level 48-combination table: not tracked in this lightweight package; compact archived OAT sensitivity summaries are included for auditing the reported ranking and EUI CV.
 - Full EnergyPlus/Sinergym working directories and intermediate simulator output folders: available locally but better suited for a Zenodo/OSF DOI archive if public raw working-directory deposition is required.
 
 The R2 generated city-year trace CSVs are included here in gzip-compressed form.

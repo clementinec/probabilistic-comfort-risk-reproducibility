@@ -1,0 +1,5 @@
+parameter,display_name,default_value,sweep_values,wDDE,PMV_Vio,AC_Vio,Kh,EUI,max_elasticity,sensitivity_rank,source_note
+disc_low,disc_low,0.10,"0.05;0.08;0.10;0.12;0.15;0.20",1.07,1.71,0.59,0.98,0.19,1.71,1,"Compact archived summary of the Los Angeles annual OAT decision-parameter sweep reported in Supplementary Section S1.3."
+delta_mild,Delta_mild,0.50,"0.25;0.50;0.75;1.00",0.37,0.47,0.55,1.22,0.24,1.22,2,"Compact archived summary of the Los Angeles annual OAT decision-parameter sweep reported in Supplementary Section S1.3."
+disc_up,disc_up,0.35,"0.20;0.25;0.30;0.35;0.40;0.45",0.13,0.22,0.34,0.56,0.31,0.56,3,"Compact archived summary of the Los Angeles annual OAT decision-parameter sweep reported in Supplementary Section S1.3."
+delta_max,Delta_max,2.00,"1.00;1.50;2.00;2.50;3.00",0.19,0.25,0.08,0.17,0.33,0.33,4,"Compact archived summary of the Los Angeles annual OAT decision-parameter sweep reported in Supplementary Section S1.3."
