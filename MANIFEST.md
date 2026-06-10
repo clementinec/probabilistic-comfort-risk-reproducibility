@@ -47,6 +47,7 @@ This package is suitable for a public GitHub repository. It contains processed d
 - `microgrid_event_summary_compact.tex`: compact stress-window event summary table.
 - `probability_necessity_summary.csv`: city-year probability-necessity summary.
 - `same_city_2025_2075_same_mean_examples.csv`: same-city matched-mean examples across years.
+- `stress_window_warm_tail_threshold_sensitivity.csv`: offline sensitivity check for the Phoenix stress-window warm-tail limiter at lower thresholds 0.15, 0.20, and 0.25 with the rejection threshold held at 0.35.
 - `tail_spread_by_mean_bin.csv`: tail-spread summaries by expected-TSV bin.
 - `hidden_zone_tail_examples.csv`: R2 examples where mean aggregation hides a high-tail zone.
 - `tail_steering_action_conditioned_summary.csv`: R2 action-conditioned mean-TSV and `d_tail` sign-coherence summary.

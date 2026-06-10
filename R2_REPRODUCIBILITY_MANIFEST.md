@@ -19,6 +19,7 @@ This addendum records the second-revision diagnostic additions prepared for `BAE
 - `summary_outputs/hidden_zone_tail_examples.csv`: examples where mean aggregation hides at least one high-tail zone.
 - `summary_outputs/zone_aggregation_rows_compact.csv.gz`: gzip-compressed compact per-timestep diagnostic table used to generate the R2 aggregation summaries. Running `scripts/build_zone_and_tail_diagnostics.py` regenerates the uncompressed CSV.
 - `summary_outputs/tail_steering_action_conditioned_summary.csv`: action-conditioned `mu_TSV` versus `d_tail` sign-coherence summary.
+- `summary_outputs/stress_window_warm_tail_threshold_sensitivity.csv`: offline sensitivity check for the Phoenix stress-window warm-tail limiter at lower thresholds 0.15, 0.20, and 0.25 with the rejection threshold held at 0.35.
 - `summary_outputs/zone_tail_diagnostic_summary.md`: human-readable diagnostic summary.
 - `figures/zone_aggregation_diagnostic.pdf`: manuscript figure source for the zone-aggregation diagnostic.
 - `figures/zone_aggregation_diagnostic.png`: raster copy of the zone-aggregation diagnostic.
