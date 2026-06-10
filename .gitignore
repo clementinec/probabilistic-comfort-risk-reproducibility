@@ -1,1 +1,8 @@
 .mplconfig/
+__pycache__/
+*.pyc
+traces/*.csv
+!traces/README.md
+summary_outputs/zone_aggregation_rows_compact.csv
+rerun_medium_office_temporal/
+zoning_rerun/
