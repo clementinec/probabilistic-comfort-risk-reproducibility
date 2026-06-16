@@ -128,7 +128,7 @@ Rounded PMV class & 33.2 & 76.5 & 0.97 & 26.6 & -- & 13.8 & 10.4 & 27.6 & 47.8 &
 
 \subsection{Zone aggregation hides any-zone tail exceedance}
 
-Mean-zone aggregation produced a stable building-level summary, but it also hid zone-level risk. Across the full panel, mean-zone aggregation identified 13.45\% high-tail exceedance. Any-zone aggregation identified 37.03\%, and p90-zone aggregation identified 28.19\%. These are modeled occupied-timestep zone-state exceedances, not measured occupant exposures. In 23.58\% of occupied records, the mean-zone value was below $p_{\mathrm{tail}}=0.20$ while at least one zone exceeded it. A maximum-zone summary would assign a more severe tail category than the mean in 31.69\% of occupied records; a p90-zone summary would do so in 20.94\%.
+Mean-zone aggregation produced a stable building-level summary, but it also hid zone-level risk. Across the full panel, mean-zone aggregation identified 13.45\% high-tail exceedance. Any-zone aggregation identified 37.03\%, and p90-zone aggregation identified 28.19\%. These are modeled occupied-timestep zone-state exceedances, not measured occupant exposures. Any-zone exceedance should therefore be read as a spatial screening statistic rather than as an occupant-prevalence estimate; it is intentionally sensitive to localized perimeter-zone risk and is interpreted alongside p90-zone and area-weighted summaries. In 23.58\% of occupied records, the mean-zone value was below $p_{\mathrm{tail}}=0.20$ while at least one zone exceeded it. A maximum-zone summary would assign a more severe tail category than the mean in 31.69\% of occupied records; a p90-zone summary would do so in 20.94\%.
 
 \begin{figure}[H]
     \centering
