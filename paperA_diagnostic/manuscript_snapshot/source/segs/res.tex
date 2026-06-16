@@ -130,16 +130,16 @@ Rounded PMV class & 33.2 & 76.5 & 0.97 & 26.6 & -- & 13.8 & 10.4 & 27.6 & 47.8 &
 
 Mean-zone aggregation produced a stable building-level summary, but it also hid zone-level risk. Across the full panel, mean-zone aggregation identified 13.45\% high-tail exceedance. Any-zone aggregation identified 37.03\%, and p90-zone aggregation identified 28.19\%. These are modeled occupied-timestep zone-state exceedances, not measured occupant exposures. In 23.58\% of occupied records, the mean-zone value was below $p_{\mathrm{tail}}=0.20$ while at least one zone exceeded it. A maximum-zone summary would assign a more severe tail category than the mean in 31.69\% of occupied records; a p90-zone summary would do so in 20.94\%.
 
-The area-weighted zone-time diagnostic gives a useful check on this result. When each zone-time record was weighted by conditioned floor area, high-tail exceedance was 13.17\%, close to the mean-zone value. This does not remove the local risk signal. It shows that much of the hidden any-zone exceedance comes from smaller perimeter zones rather than from the largest core zones.
-
-The aggregation result is not an artifact of choosing 0.20 as the reporting screen. Figure~\ref{fig:tail_threshold_sensitivity} repeats the exceedance calculation from $\tau=0.05$ to $\tau=0.40$, where $\tau$ is the high-tail screen applied to $p_{\mathrm{tail}}$. Absolute exceedance falls as the screen becomes stricter, but any-zone exceedance remains well above mean-zone exceedance across the range. For example, at $\tau=0.10$, mean-zone exceedance was 35.74\% and any-zone exceedance was 60.78\%; at $\tau=0.30$, they were 5.46\% and 24.10\%, respectively. Hidden any-zone exceedance remained between 18.63\% and 25.32\% for thresholds from 0.10 to 0.30. The no-PMV predictor showed the same pattern: at $\tau=0.20$, mean-zone exceedance was 13.85\%, any-zone exceedance was 37.52\%, and hidden any-zone exceedance was 23.67\%.
+Figure~\ref{fig:tail_threshold_sensitivity} tests whether this hidden-zone effect depends on the selected reporting screen. It repeats the exceedance calculation from $\tau=0.05$ to $\tau=0.40$, where $\tau$ is the high-tail screen applied to $p_{\mathrm{tail}}$. Absolute exceedance falls as the screen becomes stricter, but any-zone exceedance remains well above mean-zone exceedance across the range. For example, at $\tau=0.10$, mean-zone exceedance was 35.74\% and any-zone exceedance was 60.78\%; at $\tau=0.30$, they were 5.46\% and 24.10\%, respectively. Hidden any-zone exceedance remained between 18.63\% and 25.32\% for thresholds from 0.10 to 0.30. The no-PMV predictor showed the same pattern: at $\tau=0.20$, mean-zone exceedance was 13.85\%, any-zone exceedance was 37.52\%, and hidden any-zone exceedance was 23.67\%.
 
 \begin{figure}[tbp]
     \centering
     \includegraphics[width=0.66\linewidth]{figs/p_tail_threshold_sensitivity.pdf}
-    \caption{Sensitivity of high-tail exceedance to the selected $p_{\mathrm{tail}}$ screen. The vertical line marks the manuscript reporting screen $\tau=0.20$. The persistent gap between mean-zone, p90-zone, and any-zone exceedance shows that the zone-aggregation result is not specific to a single threshold.}
+    \caption{Threshold sensitivity of the hidden-zone aggregation effect across the full 144-case fixed-reference panel: six cities, SSP2-4.5 and SSP5-8.5, four time slices, and three annual weather severities. The figure is pooled across pathways and is not city- or pathway-specific. The vertical line marks the manuscript reporting screen $\tau=0.20$. The persistent gap between mean-zone, p90-zone, and any-zone exceedance shows that the zone-aggregation result is not specific to a single threshold.}
     \label{fig:tail_threshold_sensitivity}
 \end{figure}
+
+The area-weighted zone-time diagnostic gives a useful check on this result. When each zone-time record was weighted by conditioned floor area, high-tail exceedance was 13.17\%, close to the mean-zone value. This does not remove the local risk signal. It shows that much of the hidden any-zone exceedance comes from smaller perimeter zones rather than from the largest core zones.
 
 \begin{table}[htbp]
 \centering
@@ -184,13 +184,13 @@ Figure~\ref{fig:zone_floor_position} was generated as a direct check on the floo
 
 \subsection{Metabolic-spread sensitivity}
 
-The metabolic-spread diagnostic shows that representative occupant assumptions can materially change the tail-risk profile even when the simulated thermal environments are held fixed. Across 216{,}483{,}840 zone-profile probability evaluations, the mean spread in mean-zone $p_{\mathrm{tail}}$ across the six metabolic profiles was 0.074, with a 95th percentile spread of 0.209. For max-zone $p_{\mathrm{tail}}$, the mean spread was 0.137 and the 95th percentile spread was 0.327.
+The metabolic-spread diagnostic shows that representative occupant assumptions can materially change the tail-risk profile even when the simulated thermal environments are held fixed. Table~\ref{tab:metabolic_scenario_summary} is a panel-level summary across both SSP pathways, all six cities, four time slices, and three annual weather severities; it is not a pathway-specific estimate. Across 216{,}483{,}840 zone-profile probability evaluations, the mean spread in mean-zone $p_{\mathrm{tail}}$ across the six metabolic profiles was 0.074, with a 95th percentile spread of 0.209. For max-zone $p_{\mathrm{tail}}$, the mean spread was 0.137 and the 95th percentile spread was 0.327.
 
 Changing the metabolic profile also changed threshold status. Mean-zone high-tail status flipped across metabolic profiles in 18.99\% of occupied records, and max-zone high-tail status flipped in 38.66\%. When the S-real profile remained below the high-tail cutoff, some other metabolic profile crossed it in 18.80\% of mean-zone records and 36.51\% of any-zone records. Because the fixed-reference panel is warm-tail dominated, lower metabolic-load profiles generally reduced predicted high-tail exposure. In this diagnostic, a lower metabolic input means the same simulated thermal environment is interpreted by the reported-TSV model with less occupant metabolic heat.
 
 \begin{table}[htbp]
 \centering
-\caption{Scenario-level metabolic-spread results. Values are recomputed over fixed environmental traces; EnergyPlus was not rerun with altered occupant heat gains.}
+\caption{Panel-level metabolic-spread results across the full 144-case fixed-reference panel: six cities, SSP2-4.5 and SSP5-8.5, four time slices, and three annual weather severities. Values are pooled across pathways and recomputed over fixed environmental traces; EnergyPlus was not rerun with altered occupant heat gains.}
 \label{tab:metabolic_scenario_summary}
 \footnotesize
 \begin{tabular}{lrrrr}
