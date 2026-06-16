@@ -89,11 +89,28 @@ The no-PMV robustness check gave the same qualitative result, but it should be r
     \label{fig:pmv_feature_robustness}
 \end{figure}
 
-The held-out TSV validation check gives the same practical reading (Table~\ref{tab:tsv_predictor_validation}). The primary TSV predictor was slightly stronger than the no-PMV predictor, but the difference was small: exact-class accuracy changed from 47.3\% to 46.9\%, within-one-class accuracy from 84.1\% to 83.8\%, and ordinal class MAE from 0.73 to 0.73. The rounded-PMV class baseline was weaker on exact and ordinal metrics, with 33.2\% exact accuracy and 0.97 class MAE. Class-specific recall was modest in the tail classes for all methods, which is consistent with the neutral-heavy and noisy structure of field TSV data. Supplementary calibration checks show that aggregate predicted $p_{\mathrm{tail}}$ aligned closely with observed tail frequency on the held-out split: the primary model's mean predicted $p_{\mathrm{tail}}$ was 0.207 versus an observed tail frequency of 0.206, with fixed-bin tail ECE of 0.011. We also tested a PMV-only calibrated tail baseline, fitted as $|\mathrm{PMV}|\rightarrow\Pr(\mathrm{TSV}\le-2\ \mathrm{or}\ \mathrm{TSV}\ge+2)$ on the same non-test data. A side-by-side supplement table shows that this baseline matched overall tail prevalence on the held-out split (mean predicted 0.206 versus observed 0.206; ECE 0.003), but it discriminated tail records less well than the TSV probability models: AUROC was 0.571 versus 0.747, average precision was 0.260 versus 0.483--0.487, Brier score was 0.161 versus 0.137--0.138, and F1 at the $p_{\mathrm{tail}}\ge0.20$ screen was 32.6\% versus 46.4--47.1\%. A stricter contributor-grouped robustness check in the supplement showed weaker transfer, especially for tail-class discrimination, which limits any absolute reading of simulated tail-risk percentages under domain shift. It also showed only small differences between the primary and no-PMV feature sets. The validation evidence therefore supports a limited claim: PMV is useful enough to improve the primary ordinal predictor slightly, and PMV alone can be calibrated to the overall tail prevalence, but the 144-case diagnostic patterns should not be treated as a PMV-only artifact.
+The held-out TSV validation check gives the same practical reading (Tables~\ref{tab:tail_probability_comparison} and~\ref{tab:tsv_predictor_validation}). The primary TSV predictor was slightly stronger than the no-PMV predictor, but the difference was small: exact-class accuracy changed from 47.3\% to 46.9\%, within-one-class accuracy from 84.1\% to 83.8\%, and ordinal class MAE from 0.73 to 0.73. The rounded-PMV class baseline was weaker on exact and ordinal metrics, with 33.2\% exact accuracy and 0.97 class MAE. Class-specific recall was modest in the tail classes for all methods, which is consistent with the neutral-heavy and noisy structure of field TSV data. Supplementary calibration checks show that aggregate predicted $p_{\mathrm{tail}}$ aligned closely with observed tail frequency on the held-out split: the primary model's mean predicted $p_{\mathrm{tail}}$ was 0.207 versus an observed tail frequency of 0.206, with fixed-bin tail ECE of 0.011. We also tested a PMV-only calibrated tail baseline, fitted as $|\mathrm{PMV}|\rightarrow\Pr(\mathrm{TSV}\le-2\ \mathrm{or}\ \mathrm{TSV}\ge+2)$ on the same non-test data. Table~\ref{tab:tail_probability_comparison} shows that this baseline matched overall tail prevalence on the held-out split, but it discriminated tail records less well than the TSV probability models. AUROC was 0.571 versus 0.747, average precision was 0.260 versus 0.483--0.487, Brier score was 0.161 versus 0.137--0.138, and F1 at the $p_{\mathrm{tail}}\ge0.20$ screen was 32.6\% versus 46.4--47.1\%. A stricter contributor-grouped robustness check in the supplement showed weaker transfer, especially for tail-class discrimination, which limits any absolute reading of simulated tail-risk percentages under domain shift. It also showed only small differences between the primary and no-PMV feature sets. The validation evidence therefore supports a limited claim: PMV is useful enough to improve the primary ordinal predictor slightly, and PMV alone can be calibrated to the overall tail prevalence, but the 144-case diagnostic patterns should not be treated as a PMV-only artifact.
 
 \begin{table}[htbp]
 \centering
-\caption{Held-out TSV validation for the primary predictor, the no-PMV robustness predictor, and a rounded-PMV class baseline. The PMV baseline rounds PMV to the nearest TSV class and clips to $[-3,+3]$; it is a deterministic scalar-label baseline, not a probability model. Class recall columns report the share of records in each observed TSV class assigned to that same class.}
+\caption{Held-out tail-probability comparison for the TSV probability models and the PMV-only calibrated scalar baseline. F1 is computed by screening each predicted tail probability at $p_{\mathrm{tail}}\ge0.20$.}
+\label{tab:tail_probability_comparison}
+\scriptsize
+\setlength{\tabcolsep}{4.2pt}
+\begin{tabular}{lrrrrrr}
+\toprule
+\textbf{Predictor} & \textbf{Mean predicted} & \textbf{Observed} & \textbf{Brier} & \textbf{ECE} & \textbf{F1 (\%)} & \textbf{AUROC} \\
+\midrule
+Primary TSV model & 0.207 & 0.206 & 0.137 & 0.011 & 47.1 & 0.747 \\
+No-PMV TSV model & 0.207 & 0.206 & 0.138 & 0.006 & 46.4 & 0.747 \\
+PMV-only calibrated tail baseline & 0.206 & 0.206 & 0.161 & 0.003 & 32.6 & 0.571 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Held-out TSV class validation for the primary predictor, the no-PMV robustness predictor, and a rounded-PMV class baseline. The PMV baseline rounds PMV to the nearest TSV class and clips to $[-3,+3]$; it is a deterministic scalar-label baseline, not a probability model. Class recall columns report the share of records in each observed TSV class assigned to that same class.}
 \label{tab:tsv_predictor_validation}
 \scriptsize
 \resizebox{\textwidth}{!}{%
