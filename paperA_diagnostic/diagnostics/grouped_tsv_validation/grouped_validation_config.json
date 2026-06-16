@@ -1,0 +1,9 @@
+{
+  "data": "/Users/guo/Library/CloudStorage/OneDrive-TheUniversityOfHongKong/Drafts/TCN/newin_with_bmr.csv",
+  "output_dir": "/Users/guo/Library/CloudStorage/OneDrive-TheUniversityOfHongKong/Drafts/Probabilities_ENB/paperA_rebuild/diagnostics/grouped_tsv_validation",
+  "group_column": "contributor",
+  "n_splits": 5,
+  "n_estimators": 220,
+  "calibration_size": 0.1765,
+  "test_size": 0.15
+}

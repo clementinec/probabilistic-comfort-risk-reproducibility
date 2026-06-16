@@ -1,0 +1,30 @@
+\section{Introduction}\label{intro}
+
+Building comfort diagnostics depend on how occupant state is represented. A scalar value such as Predicted Mean Vote (PMV), expected thermal sensation, or a binary acceptability flag is easy to communicate and easy to compare across cases. It is also lossy. A scalar mean can indicate the center of a predicted comfort state while hiding how much probability lies in the discomfort tails of the thermal sensation scale.
+
+This distinction matters because thermal sensation is not deterministic. The same air temperature, radiant temperature, humidity, clothing level, and metabolic assumption can correspond to different thermal sensation votes (TSVs) across people and contexts. Field data show substantial variation around any single comfort index, and that variation is not only noise; it reflects differences in adaptation, expectation, personal physiology, recent exposure, and behavior \citep{deDear1998Adaptive,Brager2000Adaptive,Humphreys2002Adaptive,Foldvary2018GlobalDB}. A diagnostic that records only the mean predicted state cannot directly show whether the predictor assigns nontrivial probability to severe cold or warm sensation categories.
+
+This paper therefore treats a predicted TSV distribution as an information object. For each occupied timestep, the predictor returns probabilities for the seven ASHRAE sensation classes $k\in\{-3,-2,-1,0,+1,+2,+3\}$. The expected sensation,
+\begin{equation}
+\mu_{\mathrm{TSV}}=\sum_{k=-3}^{3} k p_k,
+\end{equation}
+summarizes the central tendency of that distribution. The discomfort-tail probability,
+\begin{equation}
+p_{\mathrm{tail}}=\Pr(\mathrm{TSV}\le -2)+\Pr(\mathrm{TSV}\ge +2),
+\end{equation}
+summarizes the probability mass assigned to the cold and warm discomfort tails. In plain terms, $p_{\mathrm{tail}}$ is the model-estimated probability that an occupant state falls in the ``cool/cold'' or ``warm/hot'' sides of the TSV scale, rather than in the neutral or mildly cool/warm bins. It is not PMV, not PPD, and not a measured dissatisfaction fraction. It is a diagnostic summary of a calibrated categorical prediction.
+
+The analysis uses future weather as a stress-test domain. Hotter and more variable weather can push mechanically conditioned buildings toward higher warm-tail probability, but this study does not claim to forecast how occupants in 2050 or 2080 will feel. The occupant model is held fixed. The DOE Medium Office prototype and reference thermostat schedule are also held fixed. These choices make the experiment a controlled conditional stress test: if the same current archetype and the same comfort-risk mapping are evaluated under selected warming-climate weather files, what risk information becomes visible in the probability distribution that scalar summaries and spatial averages can miss?
+
+This framing is deliberately diagnostic. The paper does not validate HVAC operation, optimize setpoints, claim energy savings, or test actuator feasibility. Building operation is a downstream motivation: an automation system can use only the information made available to it. The present question is narrower: whether a calibrated TSV probability state exposes discomfort-tail risk that scalar comfort states, representative occupant assumptions, and mean-zone summaries hide.
+
+The contributions are:
+\begin{itemize}
+    \item a clear diagnostic definition of $p_{\mathrm{tail}}$ from a calibrated seven-class TSV probability distribution;
+    \item a 144-case fixed-archetype Medium Office future-weather stress test across six cities, two emissions scenarios, four time slices, and three annual severities;
+    \item scalar-state audits comparing $p_{\mathrm{tail}}$ with expected TSV and mean PMV;
+    \item a zone-aggregation audit showing how mean-zone probability summaries hide modeled any-zone high-tail exceedance;
+    \item a metabolic-spread diagnostic showing how representative metabolic assumptions change estimated tail-risk status.
+\end{itemize}
+
+The broader claim is narrow: probabilistic TSV distributions are useful because they make occupant-state uncertainty inspectable. They do not remove the need for adaptive-comfort theory, better occupant models, building-specific validation, or future operational studies.

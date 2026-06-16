@@ -1,0 +1,107 @@
+\section{Methods}\label{method}
+
+\subsection{Thermal-comfort data and TSV probability model}
+
+The TSV probability model follows the published ordinal thermal-comfort framework of Guo and Aviv \citep{guo2026seven} and was trained from the ASHRAE Global Thermal Comfort Database II \citep{Foldvary2018GlobalDB}. Records with incomplete core fields were removed, environmental variables were screened for extreme outliers, and the remaining observations were split into training, calibration, and held-out test partitions using stratified sampling over the seven TSV classes. The feature set included air temperature, mean radiant temperature, relative humidity, air speed, clothing insulation, metabolic rate, body surface area, PMV, and adaptive-comfort descriptors. PMV is included as a covariate because it is a useful physics-based summary of the same thermal state; the supervised target remains the observed TSV.
+
+The deployed model is an ordinal gradient-boosted predictor with post-hoc isotonic calibration of cumulative probabilities. A nominal multiclass model was retained as a sensitivity comparator during model development, but the main diagnostic uses the ordinal predictor because it respects the ordered TSV scale. Calibration and label-support checks are reported in the supplementary material. Extreme TSV labels are sparser than neutral and mild labels, so tail probabilities should be interpreted as calibrated diagnostic estimates rather than as direct measurements of occupant dissatisfaction.
+
+\subsection{Probability object and definition of $p_{\mathrm{tail}}$}
+
+For each occupied timestep $t$, the predictor returns a probability vector over the seven TSV classes:
+\begin{equation}
+\mathbf{p}^{(t)}=\{p_{-3}^{(t)},p_{-2}^{(t)},p_{-1}^{(t)},p_{0}^{(t)},p_{+1}^{(t)},p_{+2}^{(t)},p_{+3}^{(t)}\},
+\end{equation}
+where $p_k^{(t)}=\Pr(\mathrm{TSV}=k\mid \mathbf{x}^{(t)})$ and $\sum_k p_k^{(t)}=1$.
+
+The expected sensation is
+\begin{equation}
+\mu_{\mathrm{TSV}}^{(t)}=\sum_{k=-3}^{+3} k p_k^{(t)} .
+\end{equation}
+It is a scalar mean of the predicted categorical distribution. Positive values indicate warmer expected sensation; negative values indicate cooler expected sensation.
+
+The discomfort-tail probability is
+\begin{equation}
+p_{\mathrm{tail}}^{(t)}
+= \Pr(\mathrm{TSV}\le -2\mid \mathbf{x}^{(t)})+\Pr(\mathrm{TSV}\ge +2\mid \mathbf{x}^{(t)})
+=p_{-3}^{(t)}+p_{-2}^{(t)}+p_{+2}^{(t)}+p_{+3}^{(t)} .
+\end{equation}
+This is the central diagnostic variable in the paper. It is the probability mass assigned to the two discomfort tails of the TSV scale. The lower tail contains cool and cold votes; the upper tail contains warm and hot votes. Neutral and mild votes ($-1,0,+1$) are not counted in $p_{\mathrm{tail}}$.
+
+We also record warm-tail probability,
+\begin{equation}
+p_{\mathrm{warm}}^{(t)}=p_{+2}^{(t)}+p_{+3}^{(t)},
+\end{equation}
+cold-tail probability,
+\begin{equation}
+p_{\mathrm{cold}}^{(t)}=p_{-3}^{(t)}+p_{-2}^{(t)},
+\end{equation}
+and directional tail dominance,
+\begin{equation}
+d_{\mathrm{tail}}^{(t)}=p_{\mathrm{warm}}^{(t)}-p_{\mathrm{cold}}^{(t)} .
+\end{equation}
+
+The screening threshold $p_{\mathrm{tail}}\ge0.20$ is used to label a timestep as high-tail in the diagnostic tables. It is not a universal comfort-preference threshold, not an ASHRAE acceptability rule, and not an operational action threshold. It loosely corresponds to a state where at least 20\% of the predicted probability mass lies in the discomfort tails, leaving at most 80\% in neutral or mild categories. Because the numerical exceedance share depends on this screen, we also audit the main aggregation result over thresholds from 0.05 to 0.40.
+
+\begin{table}[htbp]
+\centering
+\caption{Diagnostic quantities derived from the TSV probability distribution.}
+\label{tab:metric_definitions}
+\footnotesize
+\begin{tabularx}{\textwidth}{@{}p{0.20\textwidth}p{0.30\textwidth}X@{}}
+\toprule
+\textbf{Quantity} & \textbf{Definition} & \textbf{Role in this study} \\
+\midrule
+$p_k$ & $\Pr(\mathrm{TSV}=k)$, $k\in\{-3,\ldots,+3\}$ & Full categorical comfort-state distribution. \\
+$\mu_{\mathrm{TSV}}$ & $\sum_k k p_k$ & Scalar expected sensation used as a mean-state comparator. \\
+$p_{\mathrm{tail}}$ & $p_{-3}+p_{-2}+p_{+2}+p_{+3}$ & Total probability assigned to severe cold or warm sensation bins. \\
+$p_{\mathrm{warm}}$ & $p_{+2}+p_{+3}$ & Warm-side component of the tail. \\
+$p_{\mathrm{cold}}$ & $p_{-3}+p_{-2}$ & Cold-side component of the tail. \\
+$d_{\mathrm{tail}}$ & $p_{\mathrm{warm}}-p_{\mathrm{cold}}$ & Directional tail dominance; positive values indicate warm-tail dominance. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Fixed building and future-weather diagnostic panel}
+
+The simulation testbed is the DOE Medium Office prototype \citep{DOE2011ASHRAE90_1Prototypes} simulated in EnergyPlus v25.1 \citep{DOE2024EnergyPlusRef}. The building envelope, HVAC system, schedules, and setpoint logic are fixed across all weather cases. During occupied weekdays from 06:00 to 22:00, the reference schedule maintains fixed occupied heating and cooling setpoints of 22 and 24\,\degree C. During unoccupied hours, setpoints are relaxed. The probability model is evaluated every 15 minutes from simulated zone states, but no probability-derived setpoint action is applied in this diagnostic run. The panel therefore describes how the fixed archetype behaves under selected weather stress, not how a probabilistic controller would perform.
+
+The weather panel contains 144 annual weather files: six cities (Ahmedabad, Beijing, Guangzhou, Houston, Kolkata, and Phoenix), two emissions scenarios (SSP2-4.5 and SSP5-8.5), four time slices (baseline 2020s, near 2030s, mid 2050s, and late 2080s), and three selected annual severities (typical, hot, and heatwave-extreme). Each annual run produces 35{,}040 15-minute timesteps, of which 16{,}704 are occupied under the weekday office schedule. Across the full panel, the diagnostic therefore contains 2{,}405{,}376 occupied probability timesteps.
+
+The future-weather files are used as stress-test inputs. They are not interpreted as a probabilistic forecast of any city-year, and the fixed Medium Office prototype is not treated as a forecast of future building stock. The experiment asks how a fixed building and fixed comfort-risk mapping behave under selected future-weather forcing from a warming-climate panel.
+
+\subsection{Zone aggregation}
+
+The Medium Office model contains 15 conditioned thermal zones. For each occupied timestep and zone, the trace recorder stores air temperature, mean radiant temperature, relative humidity, expected TSV, warm-tail probability, cold-tail probability, total discomfort-tail probability, and directional tail dominance. The main building-level aggregate is the simple mean across zones:
+\begin{equation}
+\bar{p}_{\mathrm{tail}}^{(t)}=\frac{1}{|\mathcal{Z}|}\sum_{z\in\mathcal{Z}}p_{\mathrm{tail},z}^{(t)} .
+\end{equation}
+The zone audit compares this mean-zone value with the 90th-percentile zone value and the maximum zone value. Any-zone high-tail exceedance is defined at each occupied timestep as
+\begin{equation}
+I_{\mathrm{any}}^{(t)}=\mathbb{1}\left\{\max_{z\in\mathcal{Z}}p_{\mathrm{tail},z}^{(t)} \ge 0.20\right\}.
+\end{equation}
+Hidden any-zone exceedance is the subset of occupied timesteps for which the mean-zone value is below the high-tail screen but at least one zone crosses it:
+\begin{equation}
+I_{\mathrm{hidden}}^{(t)}=\mathbb{1}\left\{\bar{p}_{\mathrm{tail}}^{(t)}<0.20\ \mathrm{and}\ \max_{z\in\mathcal{Z}}p_{\mathrm{tail},z}^{(t)} \ge 0.20\right\}.
+\end{equation}
+The maximum-zone value is used only as a diagnostic for modeled any-zone exceedance. It is not proposed as a universal building-control rule.
+
+EnergyPlus zones are well-mixed air volumes. The zone-level diagnostic therefore does not resolve radiant asymmetry near glazing, vertical stratification, local air movement, or occupant-location-specific exposure. Any-zone exceedance is a modeled occupied-timestep zone-state metric, not a measured occupant-exposure metric. Its purpose is narrower: to quantify information loss when zone-level probability states are averaged.
+
+\subsection{Scalar PMV and expected-TSV comparison}
+
+The trace recorder also stores mean PMV across zones. We compare the primary $p_{\mathrm{tail}}$ output against two scalar summaries: $|\mu_{\mathrm{TSV}}|$ and $|\mathrm{PMV}|$. In that comparison, both scalars are evaluated against the same probability distribution produced by the primary TSV model. For each scalar, we report the standard threshold $0.5$ and the best global scalar threshold for predicting $p_{\mathrm{tail}}\ge0.20$ in the 144-case panel. The goal is not to argue that PMV is invalid. PMV is used as a familiar scalar mean-state comparator, while $\mu_{\mathrm{TSV}}$ is the scalar expectation from the same probability distribution that defines $p_{\mathrm{tail}}$.
+
+Because PMV is an engineered covariate in the primary TSV predictor, we also run a no-PMV robustness model. This is a separate ordinal TSV predictor trained with the same pipeline after removing PMV from the feature set, then re-applied to the same 144 simulated traces. In the robustness comparison, the x-axis PMV scalar remains the same stored thermal-state value, but the y-axis changes from the primary $p_{\mathrm{tail}}$ output to the no-PMV $p_{\mathrm{tail}}$ output. This design tests whether the observed scalar-reference pattern is created only by including PMV as a predictor feature.
+
+We also report held-out TSV validation metrics for the primary predictor, the no-PMV predictor, and a deterministic PMV class baseline. The PMV baseline is computed by rounding PMV to the nearest seven-point TSV class and clipping the result to $[-3,+3]$. It is therefore a scalar-label baseline, not a calibrated probability model; log loss and expected-probability metrics are reported only for the probabilistic TSV predictors.
+
+\subsection{Metabolic-spread diagnostic}
+
+The base diagnostic uses fixed office defaults for occupant variables. To test what a single representative metabolic assumption hides, we perform an offline metabolic-spread diagnostic on the same simulated zone environments. The EnergyPlus thermal states are not rerun with altered internal heat gains. Instead, the TSV probability model is re-evaluated for each occupied zone state under six metabolic-load profiles derived from the published correction of the 120-W assumption \citep{Guo2025Correcting120W}: 90.0, 93.2, 100.0, 108.0, 110.0, and 120.0 W/person. Under the paper-convention conversion, 120 W/person equals 1.2 met. These profiles are sensitivity cases for the reported-TSV model, not demographic strata assigned to the simulated occupants.
+
+This diagnostic isolates representation sensitivity. It estimates how $p_{\mathrm{tail}}$ changes when the same simulated environment is interpreted under different plausible metabolic-load assumptions. It should not be read as a building-physics result for altered occupant heat gains.
+
+\subsection{Run quality assurance}
+
+The full zone-raw diagnostic run produced 144 per-case trace files, 144 EnergyPlus error files, and 144 EnergyPlus end files. Each trace contains 35{,}040 annual rows, 16{,}704 occupied rows, and 45 raw zone environmental fields for the 15 conditioned zones. No trace had missing or nonfinite occupied raw zone values. EnergyPlus completed all annual cases without fatal errors. Sixteen cases reported warmup load-convergence Severe messages; these cases still completed successfully and are retained with this QA caveat.
