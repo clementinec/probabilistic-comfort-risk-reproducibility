@@ -87,6 +87,27 @@ Rounded PMV class & 13.8 & 10.4 & 27.6 & 47.8 & 26.3 & 14.5 & 10.5 \\
 \end{tabular}
 \end{table}
 
+\section{PMV-Only Calibrated Tail Baseline}
+
+As a scalar-reference check, PMV was also given a calibrated probability baseline. This baseline used only $|\mathrm{PMV}|$ as the input and the binary tail label $\mathbf{1}\{\mathrm{TSV}\le-2\ \mathrm{or}\ \mathrm{TSV}\ge+2\}$ as the target. An isotonic regression was fitted on the non-test partition and evaluated on the same held-out test records used in Tables~\ref{tab:supp_tsv_validation} and~\ref{tab:supp_class_recall}. This is not an ordinal TSV model; it only tests how much severe-tail probability can be recovered from PMV alone after calibration.
+
+\begin{table}[htbp]
+\centering
+\caption{PMV-only calibrated tail-probability baseline on the held-out test partition. F1 is computed by screening the calibrated tail probability at $p_{\mathrm{tail}}\ge0.20$.}
+\label{tab:supp_pmv_only_tail}
+\scriptsize
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+Baseline & $n$ & Mean predicted & Observed & Brier & ECE & MCE & F1 (\%) & AUROC & Avg. precision \\
+\midrule
+PMV-only calibrated tail baseline & 22223 & 0.206 & 0.206 & 0.161 & 0.003 & 0.017 & 32.6 & 0.571 & 0.260 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The PMV-only baseline matched the overall tail prevalence after calibration, with mean predicted $p_{\mathrm{tail}}=0.206$ and observed tail frequency $0.206$. Its discrimination was limited, however, with AUROC 0.571 and Brier score 0.161, compared with Brier scores 0.137--0.138 for the primary and no-PMV TSV probability models. This supports the limited interpretation in the main text: PMV contains useful scalar information, but PMV alone is not the same diagnostic object as a calibrated TSV probability distribution.
+
 \section{Contributor-Grouped Robustness Check}
 
 The record-level split above tests held-out records under the same overall ASHRAE-derived data distribution. As a stricter robustness check, the ordinal predictors were also re-estimated under five contributor-grouped train/calibration/test splits. Contributor groups were kept disjoint across training, calibration, and test partitions. Each split used 43 contributor groups for training, 10 for calibration, and 10 for testing; the mean test size was 26{,}484 records.

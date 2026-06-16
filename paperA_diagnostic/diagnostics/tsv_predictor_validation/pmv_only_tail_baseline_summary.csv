@@ -1,0 +1,2 @@
+predictor,n_test,mean_predicted_p_tail,observed_tail_frequency,tail_brier,tail_ece_fixed_bins,tail_mce_fixed_bins,tail_precision_at_0_20,tail_recall_at_0_20,tail_f1_at_0_20,tail_auroc,tail_average_precision
+PMV-only calibrated tail baseline,22223,0.2061013090689473,0.20564280250191244,0.16085568132567135,0.0032210231062228356,0.017283616286704495,0.2548438849808713,0.45185995623632386,0.32588968673557955,0.5706889723494039,0.25996345411018135

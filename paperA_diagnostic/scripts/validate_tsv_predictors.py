@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Held-out validation for primary/no-PMV TSV predictors and a rounded-PMV baseline."""
+"""Held-out validation for TSV predictors and scalar PMV baselines."""
 
 from __future__ import annotations
 
@@ -27,7 +27,16 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from sklearn.metrics import accuracy_score, f1_score, log_loss, precision_score, recall_score
+from sklearn.isotonic import IsotonicRegression
+from sklearn.metrics import (
+    accuracy_score,
+    average_precision_score,
+    f1_score,
+    log_loss,
+    precision_score,
+    recall_score,
+    roc_auc_score,
+)
 from sklearn.model_selection import train_test_split
 
 sys.path.insert(0, str((ROOT / "scripts").resolve()))
@@ -50,24 +59,26 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def heldout_split(data_path: Path) -> tuple[pd.DataFrame, np.ndarray]:
+def heldout_split(data_path: Path) -> tuple[pd.DataFrame, np.ndarray, pd.DataFrame, np.ndarray]:
     df = panel.read_training_data(data_path, sample_limit=None)
     y = panel.round_tsv(df["thermal_sensation"])
-    _, hold_df, _, y_hold = train_test_split(
+    train_df, hold_df, y_train, y_hold = train_test_split(
         df,
         y,
         test_size=0.30,
         random_state=42,
         stratify=y,
     )
-    _, test_df, _, y_test = train_test_split(
+    cal_df, test_df, y_cal, y_test = train_test_split(
         hold_df,
         y_hold,
         test_size=0.50,
         random_state=42,
         stratify=y_hold,
     )
-    return test_df.reset_index(drop=True), y_test
+    fit_df = pd.concat([train_df, cal_df], ignore_index=True)
+    y_fit = np.concatenate([y_train, y_cal])
+    return fit_df.reset_index(drop=True), y_fit, test_df.reset_index(drop=True), y_test
 
 
 def load_bundle(path: Path) -> panel.PredictorBundle:
@@ -83,6 +94,22 @@ def pmv_class_from_features(features: pd.DataFrame) -> tuple[np.ndarray, np.ndar
     probs = np.zeros((len(pred), 7), dtype=float)
     probs[np.arange(len(pred)), pred] = 1.0
     return pred, probs
+
+
+def pmv_abs_from_features(features: pd.DataFrame) -> np.ndarray:
+    pmv = pd.to_numeric(features["pmv"], errors="coerce").fillna(0.0).to_numpy(float)
+    return np.abs(pmv)
+
+
+def pmv_only_tail_baseline(
+    fit_features: pd.DataFrame,
+    y_fit: np.ndarray,
+    test_features: pd.DataFrame,
+) -> np.ndarray:
+    tail_fit = np.isin(y_fit, TAIL_INDEX).astype(float)
+    model = IsotonicRegression(y_min=0.0, y_max=1.0, increasing=True, out_of_bounds="clip")
+    model.fit(pmv_abs_from_features(fit_features), tail_fit)
+    return np.clip(model.predict(pmv_abs_from_features(test_features)), 0.0, 1.0)
 
 
 def model_outputs(
@@ -192,6 +219,65 @@ def tail_calibration_summary(name: str, calibration: pd.DataFrame, total_n: int,
         "tail_brier": float(np.mean((tail_prob - tail_true) ** 2)),
         "tail_ece_fixed_bins": float(np.sum(weights * abs_err)),
         "tail_mce_fixed_bins": float(abs_err.max()) if len(abs_err) else np.nan,
+    }
+
+
+def tail_calibration_bins_from_probability(
+    name: str,
+    y_true: np.ndarray,
+    tail_prob: np.ndarray,
+    edges: np.ndarray = TAIL_BIN_EDGES,
+) -> pd.DataFrame:
+    tail_true = np.isin(y_true, TAIL_INDEX).astype(float)
+    records = []
+    bin_ids = np.digitize(tail_prob, edges[1:-1], right=False)
+    for i in range(len(edges) - 1):
+        mask = bin_ids == i
+        if not mask.any():
+            continue
+        pred_mean = float(tail_prob[mask].mean())
+        obs_mean = float(tail_true[mask].mean())
+        n = int(mask.sum())
+        se = float(np.sqrt(max(obs_mean * (1.0 - obs_mean), 0.0) / n))
+        records.append(
+            {
+                "predictor": name,
+                "bin_left": float(edges[i]),
+                "bin_right": float(edges[i + 1]),
+                "n": n,
+                "predicted_p_tail_mean": pred_mean,
+                "observed_tail_frequency": obs_mean,
+                "absolute_calibration_error": abs(pred_mean - obs_mean),
+                "binomial_se": se,
+            }
+        )
+    return pd.DataFrame(records)
+
+
+def tail_probability_summary(
+    name: str,
+    y_true: np.ndarray,
+    tail_prob: np.ndarray,
+    threshold: float = 0.20,
+) -> dict:
+    tail_true = np.isin(y_true, TAIL_INDEX).astype(float)
+    tail_pred = tail_prob >= threshold
+    bins = tail_calibration_bins_from_probability(name, y_true, tail_prob)
+    weights = bins["n"].to_numpy(float) / float(len(y_true))
+    abs_err = bins["absolute_calibration_error"].to_numpy(float)
+    return {
+        "predictor": name,
+        "n_test": int(len(y_true)),
+        "mean_predicted_p_tail": float(tail_prob.mean()),
+        "observed_tail_frequency": float(tail_true.mean()),
+        "tail_brier": float(np.mean((tail_prob - tail_true) ** 2)),
+        "tail_ece_fixed_bins": float(np.sum(weights * abs_err)),
+        "tail_mce_fixed_bins": float(abs_err.max()) if len(abs_err) else np.nan,
+        "tail_precision_at_0_20": precision_score(tail_true, tail_pred, zero_division=0),
+        "tail_recall_at_0_20": recall_score(tail_true, tail_pred, zero_division=0),
+        "tail_f1_at_0_20": f1_score(tail_true, tail_pred, zero_division=0),
+        "tail_auroc": roc_auc_score(tail_true, tail_prob),
+        "tail_average_precision": average_precision_score(tail_true, tail_prob),
     }
 
 
@@ -321,10 +407,60 @@ def write_calibration_latex_tables(cal_summary: pd.DataFrame, calibration: pd.Da
     )
 
 
+def write_pmv_only_tail_latex(pmv_summary: pd.DataFrame, out_dir: Path) -> None:
+    compact = pmv_summary.copy()
+    for col in [
+        "mean_predicted_p_tail",
+        "observed_tail_frequency",
+        "tail_brier",
+        "tail_ece_fixed_bins",
+        "tail_mce_fixed_bins",
+        "tail_auroc",
+        "tail_average_precision",
+    ]:
+        compact[col] = compact[col].map(lambda x: f"{x:.3f}")
+    for col in ["tail_precision_at_0_20", "tail_recall_at_0_20", "tail_f1_at_0_20"]:
+        compact[col] = compact[col].map(format_pct)
+    compact = compact.rename(
+        columns={
+            "predictor": "Baseline",
+            "n_test": "$n$",
+            "mean_predicted_p_tail": "Mean predicted",
+            "observed_tail_frequency": "Observed",
+            "tail_brier": "Brier",
+            "tail_ece_fixed_bins": "ECE",
+            "tail_mce_fixed_bins": "MCE",
+            "tail_precision_at_0_20": "Precision (\\%)",
+            "tail_recall_at_0_20": "Recall (\\%)",
+            "tail_f1_at_0_20": "F1 (\\%)",
+            "tail_auroc": "AUROC",
+            "tail_average_precision": "Avg. precision",
+        }
+    )
+    compact = compact[
+        [
+            "Baseline",
+            "$n$",
+            "Mean predicted",
+            "Observed",
+            "Brier",
+            "ECE",
+            "MCE",
+            "F1 (\\%)",
+            "AUROC",
+            "Avg. precision",
+        ]
+    ]
+    (out_dir / "pmv_only_tail_baseline_table.tex").write_text(
+        compact.to_latex(index=False, escape=False, column_format="lrrrrrrrrr"),
+        encoding="utf-8",
+    )
+
+
 def main() -> int:
     args = parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=True)
-    test_df, y_test = heldout_split(args.data)
+    fit_df, y_fit, test_df, y_test = heldout_split(args.data)
 
     primary = load_bundle(args.model_dir / "control_predictors.joblib")
     no_pmv = load_bundle(args.model_dir / "control_predictors_no_pmv.joblib")
@@ -334,9 +470,11 @@ def main() -> int:
         model_name, pred, probs = model_outputs(name, bundle, test_df)
         outputs.append((model_name, pred, probs))
 
+    fit_features = panel.build_features_from_raw(fit_df, primary.spec)
     primary_features = panel.build_features_from_raw(test_df, primary.spec)
     pmv_pred, _ = pmv_class_from_features(primary_features)
     outputs.append(("Rounded PMV class", pmv_pred, None))
+    pmv_only_tail_prob = pmv_only_tail_baseline(fit_features, y_fit, primary_features)
 
     summary = pd.DataFrame([summarize_model(name, y_test, pred, probs) for name, pred, probs in outputs])
     recall = pd.DataFrame([class_recall_rows(name, y_test, pred) for name, pred, _ in outputs])
@@ -367,21 +505,30 @@ def main() -> int:
     pred_share.to_csv(args.output_dir / "tsv_predictor_predicted_class_share.csv", index=False)
     calibration.to_csv(args.output_dir / "p_tail_calibration_bins.csv", index=False)
     calibration_summary.to_csv(args.output_dir / "p_tail_calibration_summary.csv", index=False)
+    pmv_only_bins = tail_calibration_bins_from_probability("PMV-only calibrated tail baseline", y_test, pmv_only_tail_prob)
+    pmv_only_summary = pd.DataFrame(
+        [tail_probability_summary("PMV-only calibrated tail baseline", y_test, pmv_only_tail_prob)]
+    )
+    pmv_only_bins.to_csv(args.output_dir / "pmv_only_tail_calibration_bins.csv", index=False)
+    pmv_only_summary.to_csv(args.output_dir / "pmv_only_tail_baseline_summary.csv", index=False)
     (args.output_dir / "tsv_predictor_validation_support.json").write_text(
         json.dumps(support, indent=2) + "\n",
         encoding="utf-8",
     )
     write_latex_tables(summary, recall, args.output_dir)
     write_calibration_latex_tables(calibration_summary, calibration, args.output_dir)
+    write_pmv_only_tail_latex(pmv_only_summary, args.output_dir)
     write_calibration_plot(calibration, args.output_dir)
 
     print(f"[write] {args.output_dir / 'tsv_predictor_validation_summary.csv'}")
     print(f"[write] {args.output_dir / 'tsv_predictor_class_recall.csv'}")
     print(f"[write] {args.output_dir / 'p_tail_calibration_summary.csv'}")
+    print(f"[write] {args.output_dir / 'pmv_only_tail_baseline_summary.csv'}")
     print(f"[write] {args.output_dir / 'p_tail_calibration_reliability.pdf'}")
     print(f"[write] {args.output_dir / 'tsv_predictor_validation_table.tex'}")
     print(summary.to_string(index=False))
     print(calibration_summary.to_string(index=False))
+    print(pmv_only_summary.to_string(index=False))
     return 0
 
 
