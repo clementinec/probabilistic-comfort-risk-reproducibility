@@ -126,9 +126,9 @@ Rounded PMV class & 33.2 & 76.5 & 0.97 & 26.6 & -- & 13.8 & 10.4 & 27.6 & 47.8 &
 }
 \end{table}
 
-\subsection{Zone aggregation hides any-zone tail exceedance}
+\subsection{Zone aggregation hides localized tail exceedance}
 
-Mean-zone aggregation produced a stable building-level summary, but it also hid zone-level risk. Across the full panel, mean-zone aggregation identified 13.45\% high-tail exceedance. Any-zone aggregation identified 37.03\%, and p90-zone aggregation identified 28.19\%. These are modeled occupied-timestep zone-state exceedances, not measured occupant exposures. Any-zone exceedance should therefore be read as a spatial screening statistic rather than as an occupant-prevalence estimate; it is intentionally sensitive to localized perimeter-zone risk and is interpreted alongside p90-zone and area-weighted summaries. In 23.58\% of occupied records, the mean-zone value was below $p_{\mathrm{tail}}=0.20$ while at least one zone exceeded it. A maximum-zone summary would assign a more severe tail category than the mean in 31.69\% of occupied records; a p90-zone summary would do so in 20.94\%.
+Mean-zone and area-weighted aggregation produced stable building-level summaries, but they also hid zone-level risk. Across the full panel, mean-zone aggregation identified 13.45\% high-tail exceedance, while area-weighted zone-time aggregation identified 13.17\%. In 23.58\% of occupied records, however, the mean-zone value was below $p_{\mathrm{tail}}=0.20$ while at least one localized zone exceeded it. These are modeled occupied-timestep zone-state exceedances, not measured occupant exposures. Any-zone exceedance should therefore be read as a spatial screening statistic rather than as an occupant-prevalence estimate; it is intentionally sensitive to localized perimeter-zone risk and is interpreted alongside p90-zone and area-weighted summaries. For context, any-zone aggregation identified 37.03\% high-tail exceedance, and p90-zone aggregation identified 28.19\%. A maximum-zone summary would assign a more severe tail category than the mean in 31.69\% of occupied records; a p90-zone summary would do so in 20.94\%.
 
 \begin{figure}[H]
     \centering
@@ -139,7 +139,7 @@ Mean-zone aggregation produced a stable building-level summary, but it also hid 
 
 Figure~\ref{fig:tail_threshold_sensitivity} tests whether this hidden-zone effect depends on the selected reporting screen. It repeats the exceedance calculation from $\tau=0.05$ to $\tau=0.40$, where $\tau$ is the high-tail screen applied to $p_{\mathrm{tail}}$. Absolute exceedance falls as the screen becomes stricter, but any-zone exceedance remains well above mean-zone exceedance across the range. For example, at $\tau=0.10$, mean-zone exceedance was 35.74\% and any-zone exceedance was 60.78\%; at $\tau=0.30$, they were 5.46\% and 24.10\%, respectively. Hidden any-zone exceedance remained between 18.63\% and 25.32\% for thresholds from 0.10 to 0.30. The no-PMV predictor showed the same pattern: at $\tau=0.20$, mean-zone exceedance was 13.85\%, any-zone exceedance was 37.52\%, and hidden any-zone exceedance was 23.67\%.
 
-The area-weighted zone-time diagnostic gives a useful check on this result. When each zone-time record was weighted by conditioned floor area, high-tail exceedance was 13.17\%, close to the mean-zone value. This does not remove the local risk signal. It shows that much of the hidden any-zone exceedance comes from smaller perimeter zones rather than from the largest core zones.
+The area-weighted zone-time diagnostic gives a useful check on this result. Its close agreement with the mean-zone value does not remove the local risk signal. It shows that much of the hidden any-zone exceedance comes from smaller perimeter zones rather than from the largest core zones.
 
 \begin{table}[htbp]
 \centering
