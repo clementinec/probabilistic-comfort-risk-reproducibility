@@ -87,26 +87,28 @@ Rounded PMV class & 13.8 & 10.4 & 27.6 & 47.8 & 26.3 & 14.5 & 10.5 \\
 \end{tabular}
 \end{table}
 
-\section{PMV-Only Calibrated Tail Baseline}
+\section{Calibrated Tail-Probability Comparison}
 
-As a scalar-reference check, PMV was also given a calibrated probability baseline. This baseline used only $|\mathrm{PMV}|$ as the input and the binary tail label $\mathbf{1}\{\mathrm{TSV}\le-2\ \mathrm{or}\ \mathrm{TSV}\ge+2\}$ as the target. An isotonic regression was fitted on the non-test partition and evaluated on the same held-out test records used in Tables~\ref{tab:supp_tsv_validation} and~\ref{tab:supp_class_recall}. This is not an ordinal TSV model; it only tests how much severe-tail probability can be recovered from PMV alone after calibration.
+As a scalar-reference check, PMV was also given a calibrated probability baseline. This baseline used only $|\mathrm{PMV}|$ as the input and the binary tail label $\mathbf{1}\{\mathrm{TSV}\le-2\ \mathrm{or}\ \mathrm{TSV}\ge+2\}$ as the target. An isotonic regression was fitted on the non-test partition and evaluated on the same held-out test records used in Tables~\ref{tab:supp_tsv_validation} and~\ref{tab:supp_class_recall}. This is not an ordinal TSV model; it only tests how much severe-tail probability can be recovered from PMV alone after calibration. Table~\ref{tab:supp_tail_probability_comparison} compares that scalar baseline with the primary and no-PMV TSV probability models using the same tail-probability metrics.
 
 \begin{table}[htbp]
 \centering
-\caption{PMV-only calibrated tail-probability baseline on the held-out test partition. F1 is computed by screening the calibrated tail probability at $p_{\mathrm{tail}}\ge0.20$.}
-\label{tab:supp_pmv_only_tail}
+\caption{Held-out tail-probability comparison for the TSV probability models and the PMV-only calibrated scalar baseline. F1 is computed by screening each predicted tail probability at $p_{\mathrm{tail}}\ge0.20$.}
+\label{tab:supp_tail_probability_comparison}
 \scriptsize
 \setlength{\tabcolsep}{3.2pt}
 \begin{tabular}{lrrrrrrrrr}
 \toprule
-Baseline & $n$ & Mean predicted & Observed & Brier & ECE & MCE & F1 (\%) & AUROC & Avg. precision \\
+Predictor & $n$ & Mean predicted & Observed & Brier & ECE & MCE & F1 (\%) & AUROC & Avg. precision \\
 \midrule
+Primary TSV model & 22223 & 0.207 & 0.206 & 0.137 & 0.011 & 0.047 & 47.1 & 0.747 & 0.487 \\
+No-PMV TSV model & 22223 & 0.207 & 0.206 & 0.138 & 0.006 & 0.012 & 46.4 & 0.747 & 0.483 \\
 PMV-only calibrated tail baseline & 22223 & 0.206 & 0.206 & 0.161 & 0.003 & 0.017 & 32.6 & 0.571 & 0.260 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The PMV-only baseline matched the overall tail prevalence after calibration, with mean predicted $p_{\mathrm{tail}}=0.206$ and observed tail frequency $0.206$. Its discrimination was limited, however, with AUROC 0.571 and Brier score 0.161, compared with Brier scores 0.137--0.138 for the primary and no-PMV TSV probability models. This supports the limited interpretation in the main text: PMV contains useful scalar information, but PMV alone is not the same diagnostic object as a calibrated TSV probability distribution.
+The PMV-only baseline matched the overall tail prevalence after calibration, with mean predicted $p_{\mathrm{tail}}=0.206$ and observed tail frequency $0.206$. Its calibration error was low, but its discrimination was limited: AUROC was 0.571 and average precision was 0.260, compared with AUROC 0.747 and average precision 0.483--0.487 for the TSV probability models. This supports the limited interpretation in the main text: PMV contains useful scalar information, but PMV alone is not the same diagnostic object as a calibrated TSV probability distribution.
 
 \section{Contributor-Grouped Robustness Check}
 

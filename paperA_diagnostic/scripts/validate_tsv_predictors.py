@@ -457,6 +457,53 @@ def write_pmv_only_tail_latex(pmv_summary: pd.DataFrame, out_dir: Path) -> None:
     )
 
 
+def write_tail_probability_comparison_latex(tail_summary: pd.DataFrame, out_dir: Path) -> None:
+    compact = tail_summary.copy()
+    for col in [
+        "mean_predicted_p_tail",
+        "observed_tail_frequency",
+        "tail_brier",
+        "tail_ece_fixed_bins",
+        "tail_mce_fixed_bins",
+        "tail_auroc",
+        "tail_average_precision",
+    ]:
+        compact[col] = compact[col].map(lambda x: f"{x:.3f}")
+    compact["tail_f1_at_0_20"] = compact["tail_f1_at_0_20"].map(format_pct)
+    compact = compact.rename(
+        columns={
+            "predictor": "Predictor",
+            "n_test": "$n$",
+            "mean_predicted_p_tail": "Mean predicted",
+            "observed_tail_frequency": "Observed",
+            "tail_brier": "Brier",
+            "tail_ece_fixed_bins": "ECE",
+            "tail_mce_fixed_bins": "MCE",
+            "tail_f1_at_0_20": "F1 (\\%)",
+            "tail_auroc": "AUROC",
+            "tail_average_precision": "Avg. precision",
+        }
+    )
+    compact = compact[
+        [
+            "Predictor",
+            "$n$",
+            "Mean predicted",
+            "Observed",
+            "Brier",
+            "ECE",
+            "MCE",
+            "F1 (\\%)",
+            "AUROC",
+            "Avg. precision",
+        ]
+    ]
+    (out_dir / "tail_probability_comparison_table.tex").write_text(
+        compact.to_latex(index=False, escape=False, column_format="lrrrrrrrrr"),
+        encoding="utf-8",
+    )
+
+
 def main() -> int:
     args = parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=True)
@@ -509,8 +556,20 @@ def main() -> int:
     pmv_only_summary = pd.DataFrame(
         [tail_probability_summary("PMV-only calibrated tail baseline", y_test, pmv_only_tail_prob)]
     )
+    tail_probability_rows = []
+    for name, _, probs in outputs:
+        if probs is None:
+            continue
+        tail_probability_rows.append(
+            tail_probability_summary(name, y_test, probs[:, TAIL_INDEX].sum(axis=1))
+        )
+    tail_probability_rows.append(
+        tail_probability_summary("PMV-only calibrated tail baseline", y_test, pmv_only_tail_prob)
+    )
+    tail_probability_comparison = pd.DataFrame(tail_probability_rows)
     pmv_only_bins.to_csv(args.output_dir / "pmv_only_tail_calibration_bins.csv", index=False)
     pmv_only_summary.to_csv(args.output_dir / "pmv_only_tail_baseline_summary.csv", index=False)
+    tail_probability_comparison.to_csv(args.output_dir / "tail_probability_comparison_summary.csv", index=False)
     (args.output_dir / "tsv_predictor_validation_support.json").write_text(
         json.dumps(support, indent=2) + "\n",
         encoding="utf-8",
@@ -518,16 +577,19 @@ def main() -> int:
     write_latex_tables(summary, recall, args.output_dir)
     write_calibration_latex_tables(calibration_summary, calibration, args.output_dir)
     write_pmv_only_tail_latex(pmv_only_summary, args.output_dir)
+    write_tail_probability_comparison_latex(tail_probability_comparison, args.output_dir)
     write_calibration_plot(calibration, args.output_dir)
 
     print(f"[write] {args.output_dir / 'tsv_predictor_validation_summary.csv'}")
     print(f"[write] {args.output_dir / 'tsv_predictor_class_recall.csv'}")
     print(f"[write] {args.output_dir / 'p_tail_calibration_summary.csv'}")
     print(f"[write] {args.output_dir / 'pmv_only_tail_baseline_summary.csv'}")
+    print(f"[write] {args.output_dir / 'tail_probability_comparison_summary.csv'}")
     print(f"[write] {args.output_dir / 'p_tail_calibration_reliability.pdf'}")
     print(f"[write] {args.output_dir / 'tsv_predictor_validation_table.tex'}")
     print(summary.to_string(index=False))
     print(calibration_summary.to_string(index=False))
+    print(tail_probability_comparison.to_string(index=False))
     print(pmv_only_summary.to_string(index=False))
     return 0
 
