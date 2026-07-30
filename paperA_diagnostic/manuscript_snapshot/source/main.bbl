@@ -1,0 +1,184 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{deDear1998Adaptive}
+R.~J. de~Dear, G.~S. Brager, Developing an adaptive model of thermal comfort
+  and preference, ASHRAE Transactions 104~(1) (1998) 145--167.
+
+\bibitem{Brager2000Adaptive}
+G.~S. Brager, R.~J. de~Dear, A standard for natural ventilation, ASHRAE Journal
+  42~(10) (2000) 21--28.
+
+\bibitem{Humphreys2002Adaptive}
+M.~A. Humphreys, F.~Nicol, The validity of {ISO-PMV} for predicting comfort
+  votes in every-day thermal environments, Energy and Buildings 34~(6) (2002)
+  667--684.
+\newblock \href {https://doi.org/10.1016/S0378-7788(02)00017-7}
+  {\path{doi:10.1016/S0378-7788(02)00017-7}}.
+
+\bibitem{Foldvary2018GlobalDB}
+V.~F{\"o}ldv{\'a}ry~Li{\v{c}}ina, T.~Cheung, H.~Zhang, R.~de~Dear,
+  T.~Parkinson, E.~Arens, C.~Chun, S.~Schiavon, M.~Luo, G.~Brager, P.~Li,
+  et~al., Development of the {ASHRAE Global Thermal Comfort Database II},
+  Building and Environment 142 (2018) 502--512.
+\newblock \href {https://doi.org/10.1016/j.buildenv.2018.06.022}
+  {\path{doi:10.1016/j.buildenv.2018.06.022}}.
+
+\bibitem{Fanger1970PMV}
+P.~O. Fanger, Thermal Comfort: Analysis and Applications in Environmental
+  Engineering, Danish Technical Press, 1970.
+
+\bibitem{ASHRAE2023}
+{ANSI/ASHRAE Standard 55-2023}: Thermal environmental conditions for human
+  occupancy,
+  \url{https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards},
+  accessed: 2025-09-17 (2023).
+
+\bibitem{guo2026seven}
+H.~Guo, D.~Aviv, From seven points to probabilities: Ordinal learning for
+  risk-aware thermal comfort prediction, Building and Environment 295 (2026)
+  114426.
+\newblock \href {https://doi.org/10.1016/j.buildenv.2026.114426}
+  {\path{doi:10.1016/j.buildenv.2026.114426}}.
+
+\bibitem{ISO7730_2025}
+{ISO 7730}:2025: Ergonomics of the thermal environment -- analytical
+  determination and interpretation of thermal comfort using calculation of the
+  {PMV} and {PPD} indices and local thermal comfort criteria,
+  \url{https://www.iso.org/standard/85803.html}, international Standard, 4th
+  edition (2025).
+
+\bibitem{Yang2023ChineseDataset}
+L.~Yang, S.~Zhao, Y.~Zhai, S.~Gao, F.~Wang, Z.~Lian, L.~Duanmu, Y.~Zhang,
+  X.~Zhou, B.~Cao, Z.~Wang, H.~Yan, H.~Zhang, E.~Arens, R.~de~Dear, The
+  {Chinese Thermal Comfort Dataset}, Scientific Data 10 (2023) 662.
+\newblock \href {https://doi.org/10.1038/s41597-023-02568-3}
+  {\path{doi:10.1038/s41597-023-02568-3}}.
+
+\bibitem{Kim2018PCM}
+J.~Kim, S.~Schiavon, G.~S. Brager, Personal comfort models--a new paradigm in
+  thermal comfort for occupant-centric environmental control, Building and
+  Environment 132 (2018) 114--124.
+\newblock \href {https://doi.org/10.1016/j.buildenv.2018.01.023}
+  {\path{doi:10.1016/j.buildenv.2018.01.023}}.
+
+\bibitem{Luo2020CompareML}
+M.~Luo, J.~Xie, Y.~Yan, Z.~Ke, Y.~Zhai, et~al., Comparing machine learning
+  algorithms in predicting thermal sensation using {ASHRAE Comfort Database
+  II}, Energy and Buildings 210 (2020) 109776.
+\newblock \href {https://doi.org/10.1016/j.enbuild.2020.109776}
+  {\path{doi:10.1016/j.enbuild.2020.109776}}.
+
+\bibitem{Kim2019Bayesian}
+S.~Lee, I.~Bilionis, P.~Karava, A.~Tzempelikos, A {Bayesian} approach for
+  probabilistic classification and inference of occupant thermal preferences in
+  office buildings, Building and Environment 118 (2017) 323--343.
+
+\bibitem{Zhang2024BayesianMeta}
+H.~Zhang, S.~Lee, A.~Tzempelikos, {Bayesian} meta-learning for personalized
+  thermal comfort modeling, Building and Environment 249 (2024) 111129.
+
+\bibitem{McCullagh1980Ordinal}
+P.~McCullagh, \href{https://www.jstor.org/stable/2984952}{Regression models for
+  ordinal data}, Journal of the Royal Statistical Society: Series B 42~(2)
+  (1980) 109--142.
+\newline\urlprefix\url{https://www.jstor.org/stable/2984952}
+
+\bibitem{Agresti2010Ordinal}
+A.~Agresti, Analysis of Ordinal Categorical Data, 2nd Edition, Wiley, Hoboken,
+  NJ, 2010.
+
+\bibitem{Favero2023Ordinal}
+M.~Favero, A.~Luparelli, S.~Carlucci, Analysis of subjective thermal comfort
+  data: A statistical point of view, Energy and Buildings 281 (2023) 112755.
+\newblock \href {https://doi.org/10.1016/j.enbuild.2022.112755}
+  {\path{doi:10.1016/j.enbuild.2022.112755}}.
+
+\bibitem{Niculescu-Mizil2005PredictingGP}
+A.~Niculescu-Mizil, R.~Caruana, Predicting good probabilities with supervised
+  learning, in: Proceedings of the 22nd International Conference on Machine
+  Learning, Association for Computing Machinery, 2005, pp. 625--632.
+\newblock \href {https://doi.org/10.1145/1102351.1102430}
+  {\path{doi:10.1145/1102351.1102430}}.
+
+\bibitem{Gneiting2007Scoring}
+T.~Gneiting, A.~E. Raftery, Strictly proper scoring rules, prediction, and
+  estimation, Journal of the American Statistical Association 102~(477) (2007)
+  359--378.
+\newblock \href {https://doi.org/10.1198/016214506000001437}
+  {\path{doi:10.1198/016214506000001437}}.
+
+\bibitem{GuoHe2026sAMY}
+H.~Guo, K.~He, Scenario-conditioned actual meteorological years ({sAMY}): A
+  stochastic weather generator using multi-decadal observations, Energy and
+  Buildings 364 (2026) 117508.
+\newblock \href {https://doi.org/10.1016/j.enbuild.2026.117508}
+  {\path{doi:10.1016/j.enbuild.2026.117508}}.
+
+\bibitem{GuoHe2026InputQuality}
+H.~Guo, K.~He, Input quality, not statistical complexity, determines
+  climate-adapted weather file fidelity: A causal decomposition of degree-day
+  errors, Energy 353 (2026) 140867.
+\newblock \href {https://doi.org/10.1016/j.energy.2026.140867}
+  {\path{doi:10.1016/j.energy.2026.140867}}.
+
+\bibitem{Chaer2026OverheatingFramework}
+I.~Chaer, B.~Ozarisoy, M.~A. Elnour~Ismail, Development of an evidence-based
+  methodological framework for overheating risk assessment of higher education
+  buildings: occupant-centric retrofitting design strategies, Energy and
+  Buildings 351 (2026) 116723.
+\newblock \href {https://doi.org/10.1016/j.enbuild.2025.116723}
+  {\path{doi:10.1016/j.enbuild.2025.116723}}.
+
+\bibitem{Ozarisoy2026ClimateResponsiveEnvelope}
+B.~Ozarisoy, M.~A. Elnour~Ismail, I.~Chaer, R.~R. Moussa, M.~Alghrieb, E.~M. S.
+  M.~M. Elshazly, I.~El-Mahallawi, H.~Safwat, A.~I. Elshamy, Climate-responsive
+  envelope design for educational buildings: A comparative simulation study
+  between the {UK and Egypt}, Energy and Buildings 362 (2026) 117493.
+\newblock \href {https://doi.org/10.1016/j.enbuild.2026.117493}
+  {\path{doi:10.1016/j.enbuild.2026.117493}}.
+
+\bibitem{Chang2025Review}
+Y.~Chang, H.~Guo, Y.~Li, I.~Pigliautile, B.~Chi, A data-driven qualitative
+  review of thermal comfort studies: Bridging the gap between western and
+  eastern perspectives, Renewable and Sustainable Energy Reviews 224 (2025)
+  116020.
+\newblock \href {https://doi.org/10.1016/j.rser.2025.116020}
+  {\path{doi:10.1016/j.rser.2025.116020}}.
+
+\bibitem{DOE2011ASHRAE90_1Prototypes}
+M.~Deru, K.~Field, D.~Studer, K.~Benne, B.~Griffith, P.~Torcellini, B.~Liu,
+  M.~Halverson, D.~Winiarski, M.~Rosenberg, M.~Yazdanian, J.~Huang, D.~Crawley,
+  \href{https://www.nrel.gov/docs/fy11osti/46861.pdf}{{U.S. Department of
+  Energy} commercial reference building models of the national building stock},
+  Tech. Rep. NREL/TP-5500-46861, National Renewable Energy Laboratory (NREL),
+  Golden, CO (2011).
+\newline\urlprefix\url{https://www.nrel.gov/docs/fy11osti/46861.pdf}
+
+\bibitem{DOE2024EnergyPlusRef}
+{U.S. Department of Energy},
+  \href{https://energyplus.net/documentation}{{EnergyPlus} engineering
+  reference: The reference to {EnergyPlus} calculations}, Tech. rep., U.S.
+  Department of Energy, Office of Energy Efficiency and Renewable Energy,
+  accessed 2026 (2026).
+\newline\urlprefix\url{https://energyplus.net/documentation}
+
+\bibitem{Guo2025Correcting120W}
+H.~Guo, R.~Sun, Y.~Xu, Correcting the 120-watt assumption: Demographic-aware
+  metabolic rates for energy savings and thermal comfort equity in buildings,
+  Energy and Buildings 349 (2025) 116525.
+\newblock \href {https://doi.org/10.1016/j.enbuild.2025.116525}
+  {\path{doi:10.1016/j.enbuild.2025.116525}}.
+
+\bibitem{Xu2025ElderlyThermalReview}
+J.~Xu, Y.~Lu, J.~He, Y.~Lu, A review on thermal characteristics of the elderly
+  and methods for maintaining their thermal comfort in cold winter season,
+  Building and Environment 269 (2025) 112469.
+\newblock \href {https://doi.org/10.1016/j.buildenv.2024.112469}
+  {\path{doi:10.1016/j.buildenv.2024.112469}}.
+
+\end{thebibliography}

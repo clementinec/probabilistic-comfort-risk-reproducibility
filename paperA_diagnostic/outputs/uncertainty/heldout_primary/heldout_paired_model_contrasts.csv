@@ -1,0 +1,15 @@
+contrast,metric,estimate,ci_lower_2_5,ci_upper_97_5,bootstrap_mean,bootstrap_sd,n_bootstrap_valid,direction_note
+Primary TSV model minus No-PMV TSV model,observed_tail_prevalence,0.0,0.0,0.0,0.0,0.0,5000,raw first-minus-second difference
+Primary TSV model minus No-PMV TSV model,mean_predicted_p_tail,0.0003527726355748162,-0.0009236953859021,0.0016120476341502793,0.00034954801517339773,0.0006448470283570831,5000,raw first-minus-second difference
+Primary TSV model minus No-PMV TSV model,calibration_gap_predicted_minus_observed,0.0003527726355748162,-0.0009236953859021,0.0016120476341502793,0.00034954801517339773,0.0006448470283570831,5000,raw first-minus-second difference
+Primary TSV model minus No-PMV TSV model,tail_brier,-0.0003404443420391423,-0.0010021608464589563,0.0002304406051901977,-0.0003545134334338454,0.0003131419743687123,5000,negative favors first predictor
+Primary TSV model minus No-PMV TSV model,tail_ece_fixed_bins,0.004140224258911796,-0.0029494228987035037,0.005588682775459052,0.0015293009005838193,0.0022182393316187606,5000,negative favors first predictor
+Primary TSV model minus No-PMV TSV model,tail_auroc,0.0008173677808558377,-0.0022891308774559303,0.003458395285427726,0.0007842103470495118,0.0014617870715397932,5000,positive favors first predictor
+Primary TSV model minus No-PMV TSV model,tail_average_precision,0.0044182497052734915,-0.000908786168581152,0.010178432859643087,0.004491578374455407,0.0028850889335000226,5000,positive favors first predictor
+Primary TSV model minus PMV-only calibrated tail baseline,observed_tail_prevalence,0.0,0.0,0.0,0.0,0.0,5000,raw first-minus-second difference
+Primary TSV model minus PMV-only calibrated tail baseline,mean_predicted_p_tail,0.0012802167574731405,-0.026022158613476693,0.025485914345973488,0.0004936722543312905,0.01314249135543997,5000,raw first-minus-second difference
+Primary TSV model minus PMV-only calibrated tail baseline,calibration_gap_predicted_minus_observed,0.0012802167574731405,-0.026022158613476693,0.025485914345973488,0.0004936722543312905,0.01314249135543997,5000,raw first-minus-second difference
+Primary TSV model minus PMV-only calibrated tail baseline,tail_brier,-0.0234987456789173,-0.02932978835700157,-0.017956928057334506,-0.023412887374135553,0.0029074317221474636,5000,negative favors first predictor
+Primary TSV model minus PMV-only calibrated tail baseline,tail_ece_fixed_bins,0.007419046320977736,-0.02700738473353611,0.008571957409804756,-0.006542025084652292,0.00955677419087794,5000,negative favors first predictor
+Primary TSV model minus PMV-only calibrated tail baseline,tail_auroc,0.17674323677913917,0.1375174348528677,0.20336707607190616,0.17166509405273495,0.01662867957138838,5000,positive favors first predictor
+Primary TSV model minus PMV-only calibrated tail baseline,tail_average_precision,0.22709234979362153,0.1863206440097322,0.25971268725646474,0.22241166767392273,0.018563357102214066,5000,positive favors first predictor

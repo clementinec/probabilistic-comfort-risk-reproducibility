@@ -1,57 +1,67 @@
-# Reproducibility Package
+# Hidden Behind the Mean — R01 Reproducibility Package
 
-This package contains the processed outputs and scripts needed to reproduce the probability-necessity diagnostics and manuscript figures for:
+This repository contains the compact public reproducibility package for:
 
-**Probabilistic Thermal Comfort Risk Under Future Weather: Separating Expected Sensation from Discomfort-Tail Exposure for HVAC Control**
+**Hidden Behind the Mean: Probabilistic Diagnostics of Discomfort-Relevant
+Thermal-Sensation Tails Under Future Weather**
 
-## Contents
+The R01 package replaces the earlier control-oriented repository snapshot. It
+contains the frozen clean manuscript and Supplement, final figures, analysis
+scripts, processed diagnostic summaries, uncertainty results, model and weather
+provenance, and simulation QA records used in the revision.
 
-- `summary_outputs/`: processed diagnostic summaries used in the manuscript.
-  - `probability_necessity_summary.csv`
-  - `annual_oat_elasticity_summary.csv`
-  - `annual_oat_eui_cv_summary.csv`
-  - `boundary_region_summary.csv`
-  - `mean_threshold_decision_diagnostics.csv`
-  - `tail_spread_by_mean_bin.csv`
-  - `directional_tail_diagnostics.csv`
-  - `matched_mean_tail_divergence.csv`
-  - `same_city_2025_2075_same_mean_examples.csv`
-  - `medium_office_trace_summary.csv`
-  - `microgrid_event_summary_compact.tex`
-  - `zone_aggregation_summary.csv`
-  - `zone_risk_ranking.csv`
-  - `hidden_zone_tail_examples.csv`
-  - `zone_aggregation_rows_compact.csv.gz`
-  - `tail_steering_action_conditioned_summary.csv`
-  - `stress_window_warm_tail_threshold_sensitivity.csv`
-  - `zone_tail_diagnostic_summary.md`
-- `scripts/`: analysis and weather-conversion scripts.
-  - `probability_necessity_diagnostic.py`
-  - `compute_oat_sensitivity_summary.py`
-  - `convert_cmip_csv_to_epw.py`
-  - `build_zone_and_tail_diagnostics.py`
-  - `rerun_medium_office_temporal_R2_trace_export.py`
-- `configs/`: simulation/model configuration artifacts.
-  - `medium_office_otc_control.idf`
-  - `control_predictor_metrics.json`
-- `models/`: trained control predictor artifacts used by the R2 trace rerun.
-  - `control_predictors.joblib`
-  - `control_predictor_metrics.json`
-- `figures/`: generated probability-necessity and R2 zone-aggregation diagnostic figures.
-- `traces/`: gzip-compressed R2 Medium Office city-year traces with per-zone probabilistic outputs.
+## Start here
 
-## Data Restrictions
+- [`paperA_diagnostic/README.md`](paperA_diagnostic/README.md): package map,
+  interpretation boundaries, and reproduction levels.
+- [`R01_REPRODUCIBILITY_MANIFEST.md`](R01_REPRODUCIBILITY_MANIFEST.md):
+  redistributed, checksum-only, restricted, and unavailable artifacts.
+- [`paperA_diagnostic/manuscript_snapshot/`](paperA_diagnostic/manuscript_snapshot/):
+  frozen clean manuscript, Supplement, source, and final figures.
+- [`paperA_diagnostic/outputs/`](paperA_diagnostic/outputs/): synchronized R01
+  summaries and figure/table inputs.
+- [`CHECKSUMS_SHA256.txt`](CHECKSUMS_SHA256.txt): SHA-256 manifest for the public
+  working tree.
 
-The ASHRAE Global Thermal Comfort Database II is a third-party dataset and is not redistributed here. Users must obtain it from the original source and comply with its terms of use.
+Verify the public packet from the repository root:
 
-The CMIP-derived weather CSVs and generated EPWs used for the diagnostic are not bundled in this lightweight package. The EPW conversion script records the source path pattern and conversion assumptions. The manuscript reports that the local source files identify the archive as `CMIP6_MPI_0515_ssp585`, but do not encode a separate ensemble-member identifier or upstream bias-correction metadata.
+```bash
+python3 verify_release.py
+```
 
-The R2 trace files in `traces/` are generated simulation outputs, not third-party source weather files. They are stored as `.csv.gz` files to keep the public repository within ordinary GitHub file-size limits. The redundant concatenated file `medium_office_control_traces.csv` is not tracked because it can be reconstructed by concatenating the nine city-year trace files.
+The verifier checks every listed public-file SHA-256 plus the 144-role/119-state
+inventory and the five headline spatial summaries.
 
-The compact row-level zone-aggregation table is also stored as `summary_outputs/zone_aggregation_rows_compact.csv.gz`; running `scripts/build_zone_and_tail_diagnostics.py` regenerates the uncompressed CSV.
+The recorded revision environment is listed in
+[`requirements.txt`](requirements.txt). The frozen PDFs are authoritative;
+recompilation under a different TeX installation may not be byte-identical.
 
-## Repository Plan
+## Scope
 
-This folder is prepared as the submission-time Supplementary Data package and is small enough to be committed directly to a public GitHub repository. It contains scripts, configuration files, processed summary outputs, and generated diagnostic figures needed to inspect the probability-threshold, zone-aggregation, tail-steering, and stress-window threshold analyses reported in the manuscript, plus compact annual OAT sensitivity summaries for auditing the reported ranking and EUI CV.
+The study is an information-loss audit conducted on a fixed DOE Medium Office
+archetype and fixed occupant assumptions under a structured future-weather
+stress test. It does not demonstrate closed-loop control, energy savings,
+operational effectiveness, occupant prevalence, or health risk.
 
-The second-revision R2 zone-level traces are now bundled in compressed form for direct inspection of the zone-aggregation and tail-steering diagnostics. Larger EnergyPlus working directories, source weather archives, and third-party thermal-comfort records remain excluded; if publication requires full raw working directories, they should be deposited separately in a DOI-bearing repository such as Zenodo or OSF, with this GitHub package linking to that archive.
+The diagnostic quantity is:
+
+```text
+p_tail = Pr(TSV <= -2) + Pr(TSV >= +2)
+```
+
+It is model-estimated TSV-category mass, not PPD, observed dissatisfaction,
+acceptability probability, or a standards threshold.
+
+## Public-data boundary
+
+The third-party pooled ASHRAE–China TSV records are not redistributed. Full
+EnergyPlus traces, selected EPWs, large synchronized probability arrays, and
+upstream weather workbooks are represented by identifiers and checksums where
+redistribution is restricted or impractical. The exact upstream six-city
+weather batch configuration and its raw CMIP6/observational inputs were not
+preserved; that boundary is stated in the manuscript and provenance audit.
+
+The primary fitted predictor is retained in `models/`. The separately trained
+no-PMV sensitivity artifact is not in the compact public packet; its recorded
+SHA-256 and its fixed downstream predictions and summaries are preserved in the
+R01 outputs and manifest.

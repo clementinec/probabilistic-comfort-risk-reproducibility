@@ -1,0 +1,91 @@
+location_or_object,legacy,corrected,unit,source,difference_corrected_minus_legacy
+Abstract/results/conclusion: mean-zone screened share,13.448250917943804,13.14730004789272,%,global_threshold_curves.csv,-0.3009508700510839
+Results/conclusion: any-zone screened share,37.03217293263091,36.64316930076628,%,global_threshold_curves.csv,-0.3890036318646253
+Abstract/results/conclusion: mean-hidden any-zone share,23.5839220146871,23.495869252873565,%,global_threshold_curves.csv,-0.08805276181353605
+Full-panel mean p_tail,0.11652894834045263,0.11557731697796071,probability,corrected_headline_case_summary.csv,-0.0009516313624919198
+Unique-source mean-zone screened share,12.728949338356031,12.436411346147656,%,corrected_unique_state_global_summary.csv,-0.2925379922083753
+Unique-source any-zone screened share,35.799758121639464,35.41490590489069,%,corrected_unique_state_global_summary.csv,-0.3848522167487758
+Unique-source mean-hidden any-zone share,23.07080878328343,22.978494558743037,%,corrected_unique_state_global_summary.csv,-0.09231422454039162
+No-PMV mean-zone screened share,13.847232199872286,13.847232199872286,%,global_threshold_curves.csv,0.0
+No-PMV any-zone screened share,37.52,37.52124407992763,%,global_threshold_curves.csv,0.0012440799276234316
+Nominal mean-zone screened share,,14.338839333226904,%,global_threshold_curves.csv,
+Nominal any-zone screened share,,35.160864663154534,%,global_threshold_curves.csv,
+Nominal mean-hidden any-zone share,,20.82202532992763,%,global_threshold_curves.csv,
+Max-zone more-severe reporting category,31.686439043209873,32.04871088761175,%,corrected_zone_aggregation_group_summary.csv,0.36227184440187443
+P90-zone more-severe reporting category,20.94138296881652,21.07587337696892,%,corrected_zone_aggregation_group_summary.csv,0.1344904081524021
+Warm-tail probability exceeds cold-tail probability,78.9,78.32646538420605,%,corrected_zone_aggregation_group_summary.csv,-0.5735346157939603
+Scalar table: |PMV| Pearson r,0.856247988718893,0.8592783699444212,,corrected_scalar_global_summary.csv,0.0030303812255282336
+Scalar table: |PMV| Spearman rho,0.7505797193267796,0.7515768176381931,,corrected_scalar_global_summary.csv,0.0009970983114134802
+Scalar table: |PMV| optimized threshold,0.9120000000000004,0.9126666784286499,,corrected_scalar_global_summary.csv,0.0006666784286495364
+Scalar table: |PMV| optimized disagreement,3.367623190719455,3.2657264394423158,%,corrected_scalar_global_summary.csv,-0.10189675127713915
+Scalar table: |PMV| 0.5-band disagreement,19.107449313537675,18.926396538420605,%,corrected_scalar_global_summary.csv,-0.1810527751170703
+Scalar table: |mu_TSV| Pearson r,0.975828711022004,0.9754923219937909,,corrected_scalar_global_summary.csv,-0.000336389028213091
+Scalar table: |mu_TSV| Spearman rho,0.8964746491072529,0.8947363694041215,,corrected_scalar_global_summary.csv,-0.0017382797031314512
+Scalar table: |mu_TSV| optimized threshold,0.6088147010778383,0.6084066778421402,,corrected_scalar_global_summary.csv,-0.0004080232356981073
+Scalar table: |mu_TSV| optimized disagreement,1.0918043582375478,1.0683984541294167,%,corrected_scalar_global_summary.csv,-0.023405904108131148
+Scalar table: |mu_TSV| 0.5-band disagreement,3.490805595466156,3.4352633434440185,%,corrected_scalar_global_summary.csv,-0.05554225202213736
+Panel table: city=Ahmedabad mean p_tail,0.1316675548920785,0.1302794668884197,probability,corrected_mean_tail_summary.csv,-0.0013880880036587773
+Panel table: city=Ahmedabad screened share,17.107179916985952,16.652947397828864,%,corrected_mean_tail_summary.csv,-0.4542325191570882
+Panel table: city=Beijing mean p_tail,0.0951561298523772,0.09484284123250482,probability,corrected_mean_tail_summary.csv,-0.00031328861987238443
+Panel table: city=Beijing screened share,5.475235472541507,5.370470146871009,%,corrected_mean_tail_summary.csv,-0.10476532567049812
+Panel table: city=Guangzhou mean p_tail,0.108154502954627,0.10718340431936425,probability,corrected_mean_tail_summary.csv,-0.0009710986352627488
+Panel table: city=Guangzhou screened share,12.514467592592592,12.222621328224777,%,corrected_mean_tail_summary.csv,-0.29184626436781436
+Panel table: city=Houston mean p_tail,0.1051657010504511,0.10438902861971369,probability,corrected_mean_tail_summary.csv,-0.0007766724307374101
+Panel table: city=Houston screened share,12.332624920178798,12.088671376117496,%,corrected_mean_tail_summary.csv,-0.2439535440613021
+Panel table: city=Kolkata mean p_tail,0.1288612167770718,0.1276113794332952,probability,corrected_mean_tail_summary.csv,-0.0012498373437765942
+Panel table: city=Kolkata screened share,19.903416347381864,19.533744412515965,%,corrected_mean_tail_summary.csv,-0.3696719348658988
+Panel table: city=Phoenix mean p_tail,0.1301685096225568,0.12915778048666202,probability,corrected_mean_tail_summary.csv,-0.0010107291358947834
+Panel table: city=Phoenix screened share,13.35658125798212,13.015345625798211,%,corrected_mean_tail_summary.csv,-0.34123563218390807
+Panel table: scenario=ssp245 mean p_tail,0.1119219159978354,0.11100223675016015,probability,corrected_mean_tail_summary.csv,-0.000919679247675248
+Panel table: scenario=ssp245 screened share,11.749348126862497,11.448688271604938,%,corrected_mean_tail_summary.csv,-0.30065985525755856
+Panel table: scenario=ssp585 mean p_tail,0.121135955718552,0.12015239690982642,probability,corrected_mean_tail_summary.csv,-0.000983558808725582
+Panel table: scenario=ssp585 screened share,15.147153709025115,14.845911824180503,%,corrected_mean_tail_summary.csv,-0.3012418848446128
+Panel table: time_slice=baseline_2020s mean p_tail,0.1050977552203455,0.10426582048497361,probability,corrected_mean_tail_summary.csv,-0.0008319347353718948
+Panel table: time_slice=baseline_2020s screened share,9.174781822051935,8.906383035334185,%,corrected_mean_tail_summary.csv,-0.26839878671774997
+Panel table: time_slice=late_2080s mean p_tail,0.1374108496422677,0.1362759007591416,probability,corrected_mean_tail_summary.csv,-0.0011349488831261245
+Panel table: time_slice=late_2080s screened share,21.182052203065137,20.83981880587484,%,corrected_mean_tail_summary.csv,-0.3422333971902951
+Panel table: time_slice=mid_2050s mean p_tail,0.1182966142000186,0.11730474829508734,probability,corrected_mean_tail_summary.csv,-0.0009918659049312495
+Panel table: time_slice=mid_2050s screened share,14.278516123882504,13.957734674329503,%,corrected_mean_tail_summary.csv,-0.32078144955300125
+Panel table: time_slice=near_2030s mean p_tail,0.1053105243701431,0.1044627977807706,probability,corrected_mean_tail_summary.csv,-0.0008477265893725022
+Panel table: time_slice=near_2030s screened share,9.15765352277565,8.885263676032354,%,corrected_mean_tail_summary.csv,-0.27238984674329636
+Panel table: severity=heatwave_extreme mean p_tail,0.1205666083547801,0.11958203344001819,probability,corrected_mean_tail_summary.csv,-0.000984574914761907
+Panel table: severity=heatwave_extreme screened share,15.073485392720306,14.759438856960408,%,corrected_mean_tail_summary.csv,-0.31404653575989805
+Panel table: severity=hot mean p_tail,0.1203436109979648,0.11934364555547772,probability,corrected_mean_tail_summary.csv,-0.0009999654424870802
+Panel table: severity=hot screened share,14.792240381545335,14.47544999201788,%,corrected_mean_tail_summary.csv,-0.31679038952745486
+Panel table: severity=typical mean p_tail,0.1086765882218364,0.10780627149448395,probability,corrected_mean_tail_summary.csv,-0.000870316727352452
+Panel table: severity=typical screened share,10.479026979565772,10.207011294699871,%,corrected_mean_tail_summary.csv,-0.27201568486590055
+Zone summary: Core bottom high-tail share,7.258948289165602,6.973712217965091,%,corrected_zone_summary.csv,-0.28523607120051064
+Zone summary: Core middle high-tail share,12.911785932843763,12.57545597860792,%,corrected_zone_summary.csv,-0.33632995423584333
+Zone summary: Core top high-tail share,11.305425846104724,10.981900542784164,%,corrected_zone_summary.csv,-0.32352530332055984
+Zone summary: Bottom P1 high-tail share,30.510074100681138,30.236769636015325,%,corrected_zone_summary.csv,-0.27330446466581293
+Zone summary: Bottom P2 high-tail share,10.374386374521071,10.15550167624521,%,corrected_zone_summary.csv,-0.2188846982758612
+Zone summary: Bottom P3 high-tail share,11.665036983822905,11.544016403256705,%,corrected_zone_summary.csv,-0.12102058056619924
+Zone summary: Bottom P4 high-tail share,8.345181792784164,8.106300220838655,%,corrected_zone_summary.csv,-0.23888157194550885
+Zone summary: Middle P1 high-tail share,27.906323169433804,27.616430861536823,%,corrected_zone_summary.csv,-0.28989230789698084
+Zone summary: Middle P2 high-tail share,12.60979572424436,12.276417491485738,%,corrected_zone_summary.csv,-0.3333782327586228
+Zone summary: Middle P3 high-tail share,16.96969621381439,16.714600960515114,%,corrected_zone_summary.csv,-0.2550952532992774
+Zone summary: Middle P4 high-tail share,10.99004895700298,10.657086459663686,%,corrected_zone_summary.csv,-0.3329624973392935
+Zone summary: Top P1 high-tail share,23.589867031183484,23.273409229991486,%,corrected_zone_summary.csv,-0.31645780119199785
+Zone summary: Top P2 high-tail share,12.855578504150705,12.504365221902937,%,corrected_zone_summary.csv,-0.3512132822477678
+Zone summary: Top P3 high-tail share,15.009836300021286,14.718197903363135,%,corrected_zone_summary.csv,-0.2916383966581506
+Zone summary: Top P4 high-tail share,10.449301897083863,10.100167291932738,%,corrected_zone_summary.csv,-0.34913460515112504
+Floor summary: bottom area_weighted_high_tail_pct,11.04399908378217,10.789662465451379,%,corrected_floor_summary.csv,-0.25433661833079135
+Floor summary: bottom unweighted_zone_time_high_tail_pct,13.630725508194976,13.403260030864196,%,corrected_floor_summary.csv,-0.22746547733077982
+Floor summary: bottom any_zone_within_floor_high_tail_pct,31.85418828490847,31.51806619838229,%,corrected_floor_summary.csv,-0.33612208652618136
+Floor summary: middle area_weighted_high_tail_pct,15.114713112717174,14.794822318466913,%,corrected_floor_summary.csv,-0.3198907942502611
+Floor summary: middle unweighted_zone_time_high_tail_pct,16.27752999946786,15.967998350361857,%,corrected_floor_summary.csv,-0.3095316491060025
+Floor summary: middle any_zone_within_floor_high_tail_pct,30.69964945189442,30.348062007769258,%,corrected_floor_summary.csv,-0.35158744412516185
+Floor summary: top area_weighted_high_tail_pct,13.356472836533888,13.033598609631206,%,corrected_floor_summary.csv,-0.3228742269026821
+Floor summary: top unweighted_zone_time_high_tail_pct,14.642001915708814,14.31560803799489,%,corrected_floor_summary.csv,-0.32639387771392414
+Floor summary: top any_zone_within_floor_high_tail_pct,26.451581790123456,26.09238638782461,%,corrected_floor_summary.csv,-0.3591954022988446
+Endpoint sensitivity: mean equal_zone_mean,,0.0265178590344023,probability,global_continuous_summary.csv,
+Endpoint sensitivity: mean area_weighted_mean,,0.024592870034708,probability,global_continuous_summary.csv,
+Endpoint sensitivity: mean zone_p90,,0.0438342185893138,probability,global_continuous_summary.csv,
+Endpoint sensitivity: mean any_zone,,0.0566069691111006,probability,global_continuous_summary.csv,
+Endpoint sensitivity: mean cold_equal,,0.0025222917116534,probability,global_continuous_summary.csv,
+Endpoint sensitivity: mean warm_equal,,0.0239955673227488,probability,global_continuous_summary.csv,
+Endpoint sensitivity at 0.05: equal_zone_mean_high_pct,,10.986806220732229,%,global_threshold_curves.csv,
+Endpoint sensitivity at 0.05: area_weighted_mean_high_pct,,7.269050659855257,%,global_threshold_curves.csv,
+Endpoint sensitivity at 0.05: zone_p90_high_pct,,23.631066411238823,%,global_threshold_curves.csv,
+Endpoint sensitivity at 0.05: any_zone_high_pct,,30.337834916453808,%,global_threshold_curves.csv,
+Endpoint sensitivity at 0.05: hidden_any_zone_pct,,19.351028695721585,%,global_threshold_curves.csv,

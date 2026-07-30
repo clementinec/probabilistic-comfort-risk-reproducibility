@@ -1,0 +1,9 @@
+{
+  "data": "restricted://thermal_comfort_corpus/newin_with_bmr.csv",
+  "output_dir": "paperA_diagnostic/outputs/grouped_tsv_validation_exact",
+  "group_column": "contributor",
+  "n_splits": 5,
+  "n_estimators": 400,
+  "calibration_size": 0.1765,
+  "test_size": 0.15
+}

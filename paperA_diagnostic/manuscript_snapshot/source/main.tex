@@ -8,6 +8,8 @@
 \usepackage{url}
 \usepackage{xcolor}
 \usepackage{float}
+\usepackage{lineno}
+\modulolinenumbers[1]
 \emergencystretch=3em
 
 \journal{Building and Environment}
@@ -16,7 +18,7 @@
 
 \begin{frontmatter}
 
-\title{Hidden Behind the Mean: Probabilistic Thermal-Sensation Diagnostics of Discomfort-Tail Risk Under Future Weather}
+\title{Hidden Behind the Mean: Probabilistic Diagnostics of Discomfort-Relevant Thermal-Sensation Tails Under Future Weather}
 
 \author[inst1]{Hongshan Guo\corref{cor1}}
 \cortext[cor1]{Corresponding author}
@@ -43,22 +45,24 @@
     country={USA}}
 
 \begin{abstract}
-Scalar comfort summaries such as PMV or expected thermal sensation can hide probability mass assigned to severe cold or warm sensation categories. This study presents a diagnostic future-weather stress test for a fixed DOE Medium Office archetype operated with a fixed reference schedule. Thermal sensation vote (TSV) is represented as a calibrated seven-class probability distribution, and discomfort-tail probability is defined as $p_{\mathrm{tail}}=\Pr(\mathrm{TSV}\le -2)+\Pr(\mathrm{TSV}\ge +2)$. This quantity is used as a diagnostic screen, not as a validated action rule or universal threshold. The building was simulated under 144 weather files spanning six cities, two emissions scenarios, four time slices, and three annual severities. The occupant model and building prototype are held fixed, so the experiment is a conditional stress test rather than a forecast of future occupants or buildings. Across 2.41 million occupied timesteps, mean-zone high-tail exceedance at $p_{\mathrm{tail}}\ge0.20$ was 13.4\%, with a 95th-percentile $p_{\mathrm{tail}}$ of 0.306. Expected TSV tracked $p_{\mathrm{tail}}$ closely, while PMV was not interchangeable with the tail-probability screen. Mean-zone and area-weighted aggregation both gave about 13\% building-level high-tail exceedance, yet localized zone screening found at least one high-tail zone in 23.6\% of occupied timesteps missed by the mean. This hidden-zone effect persisted across threshold checks. Metabolic assumptions changed high-tail status in 19.0\% of mean-zone records and 38.7\% of max-zone records. Calibrated TSV probability states therefore provide an auditable diagnostic interface for tail-risk information that scalar means, representative occupants, and spatial averages can obscure.
+Scalar comfort indices report a central state or compliance band but do not expose how a predicted response distribution is allocated across thermal-sensation categories or zones. This study examines that information loss in a conditional future-weather stress test of a fixed DOE Medium Office archetype and schedule. Thermal sensation vote (TSV) is represented as a calibrated seven-class probability distribution. We define $p_{\mathrm{tail}}=\Pr(\mathrm{TSV}\le -2)+\Pr(\mathrm{TSV}\ge +2)$ as the model-estimated mass in the cool/cold and warm/hot categories outside the central $-1,0,+1$ band. This convention-anchored tail is discomfort-relevant, but it is not PPD, observed dissatisfaction, or universal unacceptability. The building was simulated under 144 weather-selection roles representing 119 unique source years across six cities, two emissions scenarios, four time slices, and three annual selectors. The occupant model and building prototype were held fixed; the experiment is therefore a no-adaptation stress test rather than a forecast of future occupants or buildings. Across 2.41 million occupied timesteps, 13.1\% of mean-zone records crossed the illustrative screen $p_{\mathrm{tail}}\ge0.20$, and the 95th percentile of $p_{\mathrm{tail}}$ was 0.304. Expected TSV tracked $p_{\mathrm{tail}}$ closely, whereas PMV remained a useful but non-equivalent scalar comparator. The mean-zone probability screen and area-weighted zone-time screened share were 13.1\% and 12.9\%, respectively, yet in 23.5\% of occupied timesteps at least one zone crossed the screen while the mean did not; this aggregation gap persisted across probability thresholds, model forms, and an endpoint-only tail definition. Metabolic assumptions changed mean-zone screen status in 19.0\% of records and max-zone status in 38.7\%. Calibrated TSV distributions thus provide a model-conditional diagnostic of category-mass, spatial, and occupant-assumption information that scalar means and aggregation can obscure.
 \end{abstract}
 
 \begin{highlights}
-\item Audits discomfort-tail probability in 144 fixed-archetype future-weather cases.
-\item Tests where scalar and spatial summaries lose tail-risk information.
-\item Finds localized high-tail zones in 23.6\% of occupied records missed by the mean.
-\item Zone-aggregation gap persists across thresholds and no-PMV checks.
-\item Metabolic assumptions change mean-zone high-tail status in 19.0\%.
+\item Audits discomfort-relevant TSV-tail probability in a fixed-archetype weather panel.
+\item Tests where scalar and spatial summaries lose category-probability information.
+\item Finds localized high-tail zones in 23.5\% of occupied records missed by the mean.
+\item Zone-aggregation gap persists across thresholds, model forms, and tail definitions.
+\item Metabolic inputs change mean-zone high-tail screen status in 19.0\%.
 \end{highlights}
 
 \begin{keyword}
-probabilistic thermal comfort \sep thermal sensation vote \sep discomfort risk \sep PMV \sep future weather \sep EnergyPlus \sep occupant-centric diagnostics
+probabilistic thermal comfort \sep thermal sensation vote \sep TSV-tail probability \sep PMV \sep future weather \sep EnergyPlus \sep occupant-centric diagnostics
 \end{keyword}
 
 \end{frontmatter}
+
+\linenumbers
 
 \input{segs/intro}
 \input{segs/lit}
@@ -68,7 +72,7 @@ probabilistic thermal comfort \sep thermal sensation vote \sep discomfort risk \
 \input{segs/dis}
 
 \section*{Data and Code Availability}
-The reproducibility workspace for this manuscript contains the run manifest, analysis scripts, processed diagnostic summaries, figure-generation inputs, model artifacts, weather-file provenance, trace-schema checks, and EnergyPlus run-quality audits used to generate the reported tables and figures. The public submission repository is \url{https://github.com/clementinec/probabilistic-comfort-risk-reproducibility}. It archives compact reproducibility materials and provides checksums for large traces and weather files where redistribution is not practical or not permitted. The ASHRAE Global Thermal Comfort Database II is a third-party dataset available from its original source subject to its terms of use and cannot be redistributed by the authors.
+The reproducibility workspace for this manuscript contains the run manifest, analysis scripts, processed diagnostic summaries, figure-generation inputs, model artifacts, weather-file provenance, trace-schema checks, and EnergyPlus run-quality audits used to generate the reported tables and figures. The public submission repository is \url{https://github.com/clementinec/probabilistic-comfort-risk-reproducibility}. It archives compact reproducibility materials and provides checksums for large traces and weather files where redistribution is not practical or not permitted. The underlying TSV corpus combines third-party records from the ASHRAE Global Thermal Comfort Database II \citep{Foldvary2018GlobalDB} and the Chinese Thermal Comfort Dataset \citep{Yang2023ChineseDataset}; row-level source data are not redistributed in the manuscript repository, which instead provides corpus provenance, processing documentation, and model artifacts.
 
 \clearpage
 \bibliographystyle{elsarticle-num}

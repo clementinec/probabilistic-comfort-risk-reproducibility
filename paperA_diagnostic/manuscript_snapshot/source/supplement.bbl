@@ -1,0 +1,22 @@
+\begin{thebibliography}{1}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{GuoHe2026sAMY}
+H.~Guo, K.~He, Scenario-conditioned actual meteorological years ({sAMY}): A
+  stochastic weather generator using multi-decadal observations, Energy and
+  Buildings 364 (2026) 117508.
+\newblock \href {https://doi.org/10.1016/j.enbuild.2026.117508}
+  {\path{doi:10.1016/j.enbuild.2026.117508}}.
+
+\bibitem{GuoHe2026InputQuality}
+H.~Guo, K.~He, Input quality, not statistical complexity, determines
+  climate-adapted weather file fidelity: A causal decomposition of degree-day
+  errors, Energy 353 (2026) 140867.
+\newblock \href {https://doi.org/10.1016/j.energy.2026.140867}
+  {\path{doi:10.1016/j.energy.2026.140867}}.
+
+\end{thebibliography}

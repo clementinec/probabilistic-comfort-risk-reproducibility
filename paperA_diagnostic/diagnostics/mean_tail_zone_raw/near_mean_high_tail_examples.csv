@@ -1,1 +1,0 @@
-weather,city,scenario_raw,time_slice,severity,weather_year,month,day,current_time,outdoor_temp_c,mean_operative_temp_c,expected_tsv,p_tail,d_tail,warm_discomfort_probability,cold_discomfort_probability,example_score

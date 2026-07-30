@@ -1,0 +1,9 @@
+rule,passed,material_claim_narrowing,detail
+endpoint_spatial_underaggregation_all_prespecified_screens,True,False,Any-zone exceeds equal-zone-mean and hidden-any-zone is nonzero at every endpoint screen.
+broad_tail_spatial_direction_both_models,True,False,"{""nominal"": true, ""ordinal"": true}"
+broad_tail_model_rate_difference_at_0_20,True,False,Maximum absolute nominal-minus-ordinal difference across aggregators: 1.482 percentage points; disclosure threshold 5.0 pp.
+stored_vs_corrected_spatial_direction,True,False,"{""ordinal"": true, ""stored_ordinal"": true}"
+stored_vs_corrected_rate_difference_at_0_20,True,False,Maximum corrected-minus-stored absolute difference across headline aggregators: 0.389 pp; disclosure threshold 5.0 pp.
+broad_tail_mean_probability_model_difference,True,False,Maximum absolute mean-probability difference: 0.01398; disclosure threshold 0.020.
+ssp585_late_vs_baseline_direction_preserved,True,False,Direction agreement across prespecified screens/aggregators: 100.0% (negligible if both <1.0 pp).
+stored_vs_corrected_ssp585_future_direction,True,False,Direction agreement across prespecified screens/aggregators: 100.0%.

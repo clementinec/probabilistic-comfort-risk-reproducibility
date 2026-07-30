@@ -1,0 +1,28 @@
+{
+  "seed": 20260729,
+  "n_bootstrap": 5000,
+  "interval": "percentile_2.5_97.5",
+  "data": "restricted://thermal_comfort_corpus/newin_with_bmr.csv",
+  "model_dir": "restricted://rebuild_workspace/runs/diagnostic_reference_zone_raw_full/models",
+  "resampling_unit": "contributor",
+  "n_test": 22223,
+  "n_contributors": 63,
+  "event_classes": [
+    -3,
+    3
+  ],
+  "observed_endpoint_support": 1350,
+  "observed_cold_endpoint_support": 443,
+  "observed_hot_endpoint_support": 907,
+  "ece_bin_edges": [
+    0.0,
+    0.05,
+    0.1,
+    0.15,
+    0.2,
+    0.3,
+    0.4,
+    0.6,
+    1.0
+  ]
+}

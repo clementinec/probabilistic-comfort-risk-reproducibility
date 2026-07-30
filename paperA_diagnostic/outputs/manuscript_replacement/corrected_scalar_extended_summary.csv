@@ -1,0 +1,2 @@
+rows,mean_p_tail,p95_p_tail,max_abs_mu_tsv,abs_mu_tsv_ge_1_pct,max_abs_pmv,pmv_ge_0p5_below_tail_screen_pct_of_pmv_ge_0p5,pmv_ge_1_below_tail_screen_pct_of_pmv_ge_1,mu_nonpositive_high_tail_pct,mu_gt_1_high_tail_pct_of_mu_gt_1,no_pmv_mean_p_tail,no_pmv_high_tail_pct
+2405376,0.11557731682999328,0.3041039705276489,2.2407188415527344,3.5371600947211577,3.312666654586792,59.01100567980719,9.346151422540093,0.0,100.0,0.12072983712574037,13.847232199872286

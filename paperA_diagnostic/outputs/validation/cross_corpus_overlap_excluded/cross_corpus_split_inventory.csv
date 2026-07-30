@@ -1,0 +1,3 @@
+direction,source_train,target_test,n_source_total,n_train,n_calibration,n_target_test,actual_train_fraction,actual_calibration_fraction,source_train_tail_prevalence,source_calibration_tail_prevalence,target_tail_prevalence,target_neutral_exact_accuracy,target_neutral_within_one_class_accuracy,target_neutral_mae_classes
+ASHRAE->China,ASHRAE,China,104354,85938,18416,40421,0.8235237748433217,0.17647622515667824,0.22303288417231026,0.2230125977410947,0.1653101110808738,0.49667252170901266,0.8346898889191262,0.7297939190024987
+China->ASHRAE,China,ASHRAE,40421,33287,7134,104354,0.823507582692165,0.17649241730783505,0.1652897527563313,0.16540510232688535,0.22302930409950744,0.4183069168407536,0.7769706959004925,0.8657646089273051

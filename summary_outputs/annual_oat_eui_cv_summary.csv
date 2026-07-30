@@ -1,2 +1,0 @@
-analysis_scope,climate,building_prototypes,predictors,n_parameter_combinations,metric,coefficient_of_variation_pct,source_note
-annual_oat_decision_parameter_sweep,Los Angeles Mediterranean climate,three DOE prototypes,ordinal and nominal,48,EUI,4.6,"Compact archived summary of the EUI coefficient of variation reported in Supplementary Section S1.3; raw full-year simulator run table was not included in the lightweight repository snapshot."

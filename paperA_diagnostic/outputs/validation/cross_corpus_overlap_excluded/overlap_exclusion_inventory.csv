@@ -1,0 +1,13 @@
+normalized_overlap_stratum,source,n_excluded
+changsha:2007,ASHRAE,47
+changsha:2007,China,47
+harbin:2001,ASHRAE,240
+harbin:2001,China,119
+harbin:2009,ASHRAE,755
+harbin:2009,China,637
+harbin:2011,ASHRAE,482
+harbin:2011,China,384
+nanyang:2006,ASHRAE,175
+nanyang:2006,China,251
+yueyang:2007,ASHRAE,118
+yueyang:2007,China,118

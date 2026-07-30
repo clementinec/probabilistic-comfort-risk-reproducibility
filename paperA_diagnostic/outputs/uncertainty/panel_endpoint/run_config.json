@@ -1,0 +1,23 @@
+{
+  "seed": 20260729,
+  "n_bootstrap": 10000,
+  "interval": "percentile_2.5_97.5",
+  "timing_provenance": "corrected_same_state",
+  "endpoint_case_summary": "paperA_diagnostic/outputs/core/endpoint_case_summary.csv",
+  "event_classes": [
+    -3,
+    3
+  ],
+  "screens": [
+    0.025,
+    0.05,
+    0.075,
+    0.1,
+    0.15,
+    0.2
+  ],
+  "role_rows": 144,
+  "unique_source_years": 119,
+  "global_resampling_blocks": 48,
+  "paired_time_slice_blocks": 12
+}

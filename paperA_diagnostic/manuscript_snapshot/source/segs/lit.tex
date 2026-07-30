@@ -1,23 +1,72 @@
 \section{Background}\label{background}
 
-\subsection{Scalar comfort indices and what they compress}
+\subsection{Distinct comfort constructs and scalar summaries}
 
-PMV remains the most widely recognized steady-state comfort index for mechanically conditioned buildings \citep{Fanger1970PMV,ISO7730_2005,ASHRAE2023}. Adaptive comfort models provide another scalar framework by relating acceptable indoor temperatures to recent outdoor conditions \citep{deDear1998Adaptive,Brager2000Adaptive,Humphreys2002Adaptive}. These models are valuable for standards, simulation diagnostics, and building-performance comparison. Their strength is also their limitation: they compress a distributed occupant response into a scalar value, band, or violation state.
+PMV is a physics-based prediction of mean thermal sensation for a specified combination of environmental and personal inputs, while PPD is a deterministic function of PMV used in standards-oriented comfort evaluation \citep{Fanger1970PMV,ISO7730_2025,ASHRAE2023}. Adaptive models instead relate acceptable indoor conditions to outdoor thermal history and adaptive opportunity \citep{deDear1998Adaptive,Brager2000Adaptive,Humphreys2002Adaptive}. These approaches remain essential reference frameworks. They do not, however, have the same target: mean sensation, predicted dissatisfaction, adaptive acceptability, reported sensation, preference, and satisfaction are related but non-interchangeable constructs.
 
-That compression is acceptable when the question is whether an average condition is near a standard reference. It is less complete when the question is whether severe sensation is probable. A scalar value cannot show whether probability mass is concentrated near neutral, spread across mild categories, or split between warm and cold discomfort tails. This paper does not argue that PMV or expected TSV should be discarded. It asks what additional information becomes visible when the full TSV probability distribution is retained.
+A scalar or comfort-band result is sufficient when the question matches its definition, such as whether specified conditions meet a standards-oriented reference. It cannot, by construction, report how a learned seven-class response distribution allocates probability among its categories. Similarly, a building-level average cannot show whether one modeled zone carries a larger local tail. The present study addresses those information transformations rather than attempting to replace PMV, PPD, or adaptive comfort.
 
-\subsection{Probabilistic and ordinal TSV modeling}
+\subsection{Probabilistic and ordinal thermal-response models}
 
-The ASHRAE Global Thermal Comfort Database II provides a large field dataset linking environmental and personal variables to observed thermal sensation votes \citep{Foldvary2018GlobalDB}. Because TSV is ordered categorical rather than continuous, ordinal probabilistic models are a natural fit \citep{McCullagh1980Ordinal,Agresti2010Ordinal,Favero2023Ordinal}. They can preserve the order of the scale while producing class probabilities for each sensation category. Probability calibration is then needed because raw classifier scores are not automatically reliable probabilities \citep{Niculescu-Mizil2005PredictingGP,Gneiting2007Scoring}.
+Large field corpora, including the ASHRAE Global Thermal Comfort Database II and the Chinese Thermal Comfort Dataset, connect environmental and personal variables to reported thermal sensation \citep{Foldvary2018GlobalDB,Yang2023ChineseDataset}. Data-driven studies have used regression, nominal classification, personal comfort models, Bayesian inference, and transfer learning to characterize heterogeneous responses \citep{Kim2018PCM,Luo2020CompareML,Kim2019Bayesian,Zhang2024BayesianMeta}. These methods differ in both target and output: some predict a mean vote, some classify preference or acceptability, and some expose response probabilities or posterior uncertainty.
 
-Recent comfort-modeling studies increasingly use probabilistic or Bayesian representations to express uncertainty in occupant response \citep{Luo2019GlobalDB,Kim2019Bayesian,Zhang2024BayesianMeta}. The contribution here is not a new claim that probabilistic comfort modeling exists. The contribution is a diagnostic use of the distribution: expected TSV and discomfort-tail probability are compared directly under future-weather stress, and the information loss from scalar and spatial aggregation is quantified.
+TSV is an ordered categorical target. Ordinal models encode the cold-to-hot ordering and can reconstruct a probability for every class \citep{McCullagh1980Ordinal,Agresti2010Ordinal,Favero2023Ordinal}. Nominal classifiers may also output class probabilities, but their objective does not encode category order. In either case, raw model scores are not automatically reliable probabilities; calibration and proper probability scores are required when thresholded probabilities will be interpreted \citep{Niculescu-Mizil2005PredictingGP,Gneiting2007Scoring}.
+
+Table~\ref{tab:construct_literature_comparison} locates the present analysis relative to these traditions. Probabilistic comfort modeling and ordinal TSV prediction already exist. The arithmetic sum defining a selected tail is likewise not claimed as a new learning method. The application gap addressed here is the absence of a controlled audit of how scalarization, spatial aggregation, reporting thresholds, and representative occupant inputs alter what is visible from the same probabilistic TSV state under a future-weather stress test.
+
+\begin{table*}[htbp]
+\centering
+\caption{Construct and methodological comparison with the present diagnostic study. ``Normative'' denotes a standards-oriented criterion rather than model superiority.}
+\label{tab:construct_literature_comparison}
+\footnotesize
+\begin{tabularx}{\textwidth}{@{}
+>{\raggedright\arraybackslash}p{0.16\textwidth}
+>{\raggedright\arraybackslash}p{0.20\textwidth}
+>{\raggedright\arraybackslash}p{0.19\textwidth}
+>{\raggedright\arraybackslash}p{0.19\textwidth}
+>{\raggedright\arraybackslash}X@{}}
+\toprule
+\textbf{Approach} & \textbf{Primary target/output} & \textbf{Treatment of heterogeneity} & \textbf{Typical use or status} & \textbf{Role in this study} \\
+\midrule
+PMV/PPD \citep{Fanger1970PMV,ISO7730_2025,ASHRAE2023}
+& Mean-vote index and deterministic PPD transform
+& Population-average response under stated inputs; no learned seven-class distribution
+& Standards-oriented evaluation for applicable conditions
+& Retained as a physics-based scalar reference; not expected to reproduce a TSV-tail screen. \\
+
+Adaptive comfort \citep{deDear1998Adaptive,Brager2000Adaptive}
+& Outdoor-history-dependent acceptable indoor band
+& Empirical adaptation at population and operation-mode levels
+& Normative path only under its applicability conditions
+& Provides contextual covariates and a construct comparison, not a compliance result for the mechanically conditioned prototype. \\
+
+Regression and nominal TSV models \citep{Luo2020CompareML,Kim2018PCM}
+& Mean/point TSV or unordered class probabilities
+& Learned population or personalized variation
+& Prediction and occupant-centric diagnostics
+& Nominal probability model is used as an alternative-model robustness check. \\
+
+Probabilistic preference models \citep{Kim2019Bayesian,Zhang2024BayesianMeta}
+& Preference or comfort-response probabilities/posteriors
+& Explicit predictive or parameter uncertainty, often personalized
+& Decision support and personal comfort modeling
+& Establish that probabilistic comfort inference is antecedent; targets are not assumed equivalent to seven-class TSV. \\
+
+Ordinal TSV probability models \citep{Favero2023Ordinal,guo2026seven}
+& Ordered class probabilities and cumulative tail scores
+& Category-specific conditional distribution with calibrated uncertainty
+& Probabilistic prediction and probability-aware diagnostics
+& Supplies the antecedent probability object; this paper tests information loss under scalar and spatial aggregation. \\
+\bottomrule
+\end{tabularx}
+\end{table*}
 
 \subsection{Future-weather stress tests and fixed mappings}
 
-Climate-informed building simulation often uses generated or selected future weather files to test how current building assumptions respond under altered outdoor forcing \citep{GuoHe2026sAMY,GuoHe2026InputQuality}. Overheating and climate-responsive envelope studies similarly use future scenarios to expose vulnerability, while recognizing that actual future risk will depend on adaptation, envelope changes, operating practices, and occupant behavior \citep{Chaer2026OverheatingFramework,Ozarisoy2026ClimateResponsiveEnvelope}.
+Climate-informed building simulation uses generated or selected future weather files to examine how a fixed design responds under altered outdoor forcing \citep{GuoHe2026sAMY,GuoHe2026InputQuality}. Such exercises are conditional stress tests rather than literal forecasts of future occupants, buildings, or event probabilities. Future outcomes also depend on adaptation, clothing, behavior, envelope and HVAC changes, design sizing, and the climate-model and weather-generation choices \citep{Chaer2026OverheatingFramework,Ozarisoy2026ClimateResponsiveEnvelope}.
 
-This study follows that stress-test logic. It does not assume that 2080 occupants have the same expectations, clothing behavior, physiology, or adaptive opportunities as current field observations. It holds the comfort-risk mapping fixed so the diagnostic question remains controlled. The result is conditional: under selected future-weather files, with a fixed prototype and fixed occupant model, how often do scalar summaries and mean aggregation hide modeled discomfort-tail exceedance?
+This study deliberately holds the building, operating schedule, and TSV-response mapping fixed. That design isolates the representation question but requires bounded interpretation. The weather-selection roles are not independent climate realizations, and changes in model-estimated TSV-tail probability cannot be attributed to climate alone without tracing the pathway from outdoor forcing through the simulated zone state to the response model.
 
 \subsection{From diagnostic states to downstream uses}
 
-Probabilistic comfort states could be used by many downstream decision frameworks, including rule-based supervisory policies, stochastic MPC, fuzzy rule bases, or operator dashboards. This paper does not compare those frameworks and does not claim stability, optimality, or actuator feasibility. Its scope ends at the diagnostic interface: the probability distribution, the scalar and tail summaries derived from it, and the audits that show where information is lost.
+Probabilistic response states could become inputs to supervisory control, stochastic optimization, commissioning, or operator dashboards. Their usefulness in those systems depends on separately validated thresholds, costs, actuators, equipment constraints, recalibration, and field performance. The present study stops before that control layer. Its supported practical uses are diagnostic: screening model outputs, comparing aggregation choices, identifying zones or conditions for closer measurement, and determining when a scalar summary is insufficient.

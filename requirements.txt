@@ -1,0 +1,8 @@
+# Recorded R01 synchronized-run environment (Python 3.11.5)
+joblib==1.2.0
+lightgbm==4.5.0
+matplotlib==3.7.2
+numpy==1.26.4
+pandas==2.2.3
+pythermalcomfort==2.10.0
+scikit-learn==1.4.2

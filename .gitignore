@@ -1,8 +1,16 @@
 .mplconfig/
 __pycache__/
 *.pyc
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.spl
 traces/*.csv
 !traces/README.md
 summary_outputs/zone_aggregation_rows_compact.csv
 rerun_medium_office_temporal/
 zoning_rerun/
+paperA_diagnostic/restricted_inputs/
+paperA_diagnostic/outputs/core/corrected_zone_npz/

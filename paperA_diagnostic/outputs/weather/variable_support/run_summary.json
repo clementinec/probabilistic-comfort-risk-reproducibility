@@ -1,0 +1,19 @@
+{
+  "cities": 6,
+  "paired_rows_per_city": 666169,
+  "documented_delta_variables": [
+    "GHI",
+    "pressure",
+    "temp",
+    "wind_speed"
+  ],
+  "exactly_scenario_invariant_variables": [
+    "DNI",
+    "relative_humidity",
+    "specific_humidity"
+  ],
+  "representation_audit_only": true,
+  "observational_validation": false,
+  "specific_humidity_written_to_epw": false,
+  "epw_dewpoint_basis": "forecast temperature plus carried relative humidity"
+}
