@@ -1,4 +1,4 @@
-# Recorded R01 synchronized-run environment (Python 3.11.5)
+# Recorded synchronized-analysis environment (Python 3.11.5)
 joblib==1.2.0
 lightgbm==4.5.0
 matplotlib==3.7.2

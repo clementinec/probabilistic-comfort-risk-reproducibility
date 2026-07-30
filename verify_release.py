@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify the public R01 packet using only the Python standard library."""
+"""Verify the public reproducibility package using the standard library."""
 
 from __future__ import annotations
 
@@ -11,10 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 CHECKSUMS = ROOT / "CHECKSUMS_SHA256.txt"
-HEADLINE = (
-    ROOT
-    / "paperA_diagnostic/outputs/core/corrected_headline_case_summary.csv"
-)
+HEADLINE = ROOT / "outputs/core/corrected_headline_case_summary.csv"
 
 EXPECTED_HEADLINES = {
     "mean-zone screened share": (

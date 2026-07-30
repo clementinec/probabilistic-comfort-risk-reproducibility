@@ -1,0 +1,19 @@
+{
+  "seed": 20260729,
+  "n_bootstrap": 10000,
+  "interval": "percentile_2.5_97.5",
+  "timing_provenance": "corrected_same_state",
+  "manifest": "data/panel_manifest.csv",
+  "mean_summary": "archive://baseline_diagnostics/mean_tail_compact/mean_tail_case_summary.csv",
+  "zone_summary": "archive://baseline_diagnostics/zone_size_mosaic/zone_size_case_summary.csv",
+  "corrected_headline_summary": "outputs/core/corrected_headline_case_summary.csv",
+  "inventory": {
+    "role_labelled_cases": 144,
+    "role_global_blocks": 48,
+    "paired_time_slice_blocks": 12,
+    "paired_scenario_blocks": 6,
+    "paired_severity_blocks": 48,
+    "unique_source_years": 119,
+    "overlapping_role_rows": 25
+  }
+}

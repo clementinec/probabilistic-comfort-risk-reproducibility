@@ -1,0 +1,9 @@
+object,source status,basis,source artifact
+Figure 1: expected TSV versus p_tail,SYNCHRONIZED,Both axes were recomputed on the synchronized end-of-step environmental state.,figures/mean_vs_tail_scatter_sample_corrected.pdf
+Figure 2: scalar-tail comparison,SYNCHRONIZED,"PMV, expected TSV, and p_tail were evaluated on the same recorded state.",figures/scalar_tail_comparison_hexbin_corrected.pdf
+Figure 3: PMV-feature robustness,SYNCHRONIZED,Corrected PMV and both ordinal outputs are synchronized and explicitly labelled.,figures/pmv_feature_robustness_hexbin_corrected.pdf
+Threshold-sensitivity figure,SYNCHRONIZED,The figure uses synchronized global_threshold_curves.csv; legacy coordinates are retained only for audit.,../core/robustness_threshold_curves.pdf
+Zone-size mosaic figure,SYNCHRONIZED,Every cell was recomputed from synchronized zone probabilities.,figures/zone_size_mosaic_heatmap_area.pdf
+Zone/floor position figure,SYNCHRONIZED,"Zone, floor, warm-tail, and cold-tail summaries use synchronized probabilities.",figures/zone_floor_position_comparison.pdf
+Held-out model calibration/validation figures,RETAINED,"These use the held-out occupant dataset, not the callback-timed simulation trace.",None
+Metabolic sensitivity figures,SEPARATE PROVENANCE,Their inference was recomputed from recorded environmental fields under the metabolic-analysis provenance.,See metabolic-analysis provenance.
